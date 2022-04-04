@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">1010769436176-io52o2si917s28gc2fllsh0bpi76l7sm.apps.googleusercontent.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">1010769436176</string>
+    <string name="google_api_key" translatable="false">AIzaSyALHx4W_JTnLc6j-7954UiCg7mamP9Ob_8</string>
+    <string name="google_app_id" translatable="false">1:1010769436176:android:e73ff0f2ca4813bfef7495</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyALHx4W_JTnLc6j-7954UiCg7mamP9Ob_8</string>
+    <string name="google_storage_bucket" translatable="false">priceapp-e2127.appspot.com</string>
+    <string name="project_id" translatable="false">priceapp-e2127</string>
+</resources>
