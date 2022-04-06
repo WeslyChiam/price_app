@@ -4,6 +4,19 @@
       jars="/home/weslychiam/Project/price_app/build/app/intermediates/flutter/release/libs.jar"
       resolved="__local_aars__:/home/weslychiam/Project/price_app/build/app/intermediates/flutter/release/libs.jar:unspecified"/>
   <library
+      name="/home/weslychiam/Project/price_app/android@@:firebase_auth::release"
+      jars="/home/weslychiam/Project/price_app/build/firebase_auth/.transforms/82b9dcc2918013355397427f2104e22c/transformed/out/jars/classes.jar"
+      resolved="io.flutter.plugins.firebase.auth:firebase_auth:unspecified"
+      folder="/home/weslychiam/Project/price_app/build/firebase_auth/.transforms/82b9dcc2918013355397427f2104e22c/transformed/out"
+      manifest="AndroidManifest.xml"
+      resFolder="res"
+      assetsFolder="assets"
+      lintJar="lint.jar"
+      publicResources="public.txt"
+      symbolFile="R.txt"
+      externalAnnotations="annotations.zip"
+      proguardRules="proguard.txt"/>
+  <library
       name="/home/weslychiam/Project/price_app/android@@:cloud_firestore::release"
       jars="/home/weslychiam/Project/price_app/build/cloud_firestore/.transforms/0a18240366815cf3fa7e28cca3c15984/transformed/out/jars/classes.jar"
       resolved="io.flutter.plugins.firebase.cloudfirestore:cloud_firestore:unspecified"
@@ -102,6 +115,19 @@
       externalAnnotations="annotations.zip"
       proguardRules="proguard.txt"/>
   <library
+      name="com.google.firebase:firebase-auth:21.0.3@aar"
+      jars="/home/weslychiam/.gradle/caches/transforms-3/23cd8702525e3e81c7b0e3d2a1c27e70/transformed/jetified-firebase-auth-21.0.3/jars/classes.jar"
+      resolved="com.google.firebase:firebase-auth:21.0.3"
+      folder="/home/weslychiam/.gradle/caches/transforms-3/23cd8702525e3e81c7b0e3d2a1c27e70/transformed/jetified-firebase-auth-21.0.3"
+      manifest="AndroidManifest.xml"
+      resFolder="res"
+      assetsFolder="assets"
+      lintJar="lint.jar"
+      publicResources="public.txt"
+      symbolFile="R.txt"
+      externalAnnotations="annotations.zip"
+      proguardRules="proguard.txt"/>
+  <library
       name="io.flutter:armeabi_v7a_release:1.0.0-57d3bac3dd5cb5b0e464ab70e7bc8a0d8cf083ab@jar"
       jars="/home/weslychiam/.gradle/caches/modules-2/files-2.1/io.flutter/armeabi_v7a_release/1.0.0-57d3bac3dd5cb5b0e464ab70e7bc8a0d8cf083ab/b47091ef34acbcdb4798146eed5c93e77478225/armeabi_v7a_release-1.0.0-57d3bac3dd5cb5b0e464ab70e7bc8a0d8cf083ab.jar"
       resolved="io.flutter:armeabi_v7a_release:1.0.0-57d3bac3dd5cb5b0e464ab70e7bc8a0d8cf083ab"/>
@@ -166,6 +192,32 @@
       externalAnnotations="annotations.zip"
       proguardRules="proguard.txt"/>
   <library
+      name="com.google.android.gms:play-services-auth-api-phone:17.4.0@aar"
+      jars="/home/weslychiam/.gradle/caches/transforms-3/2bd0aa0054ca9aeebe14ca496d2844c4/transformed/jetified-play-services-auth-api-phone-17.4.0/jars/classes.jar"
+      resolved="com.google.android.gms:play-services-auth-api-phone:17.4.0"
+      folder="/home/weslychiam/.gradle/caches/transforms-3/2bd0aa0054ca9aeebe14ca496d2844c4/transformed/jetified-play-services-auth-api-phone-17.4.0"
+      manifest="AndroidManifest.xml"
+      resFolder="res"
+      assetsFolder="assets"
+      lintJar="lint.jar"
+      publicResources="public.txt"
+      symbolFile="R.txt"
+      externalAnnotations="annotations.zip"
+      proguardRules="proguard.txt"/>
+  <library
+      name="com.google.android.gms:play-services-safetynet:17.0.0@aar"
+      jars="/home/weslychiam/.gradle/caches/transforms-3/7f0ea47fe80da728934a4846ab267619/transformed/jetified-play-services-safetynet-17.0.0/jars/classes.jar"
+      resolved="com.google.android.gms:play-services-safetynet:17.0.0"
+      folder="/home/weslychiam/.gradle/caches/transforms-3/7f0ea47fe80da728934a4846ab267619/transformed/jetified-play-services-safetynet-17.0.0"
+      manifest="AndroidManifest.xml"
+      resFolder="res"
+      assetsFolder="assets"
+      lintJar="lint.jar"
+      publicResources="public.txt"
+      symbolFile="R.txt"
+      externalAnnotations="annotations.zip"
+      proguardRules="proguard.txt"/>
+  <library
       name="com.google.android.gms:play-services-base:18.0.1@aar"
       jars="/home/weslychiam/.gradle/caches/transforms-3/6d739175f0ab7d6ff30ea0a3c07befb6/transformed/jetified-play-services-base-18.0.1/jars/classes.jar"
       resolved="com.google.android.gms:play-services-base:18.0.1"
@@ -192,10 +244,10 @@
       externalAnnotations="annotations.zip"
       proguardRules="proguard.txt"/>
   <library
-      name="com.google.firebase:firebase-auth-interop:19.0.2@aar"
-      jars="/home/weslychiam/.gradle/caches/transforms-3/cb4ba3072f3db359d58254dfc5f0d1a7/transformed/jetified-firebase-auth-interop-19.0.2/jars/classes.jar"
-      resolved="com.google.firebase:firebase-auth-interop:19.0.2"
-      folder="/home/weslychiam/.gradle/caches/transforms-3/cb4ba3072f3db359d58254dfc5f0d1a7/transformed/jetified-firebase-auth-interop-19.0.2"
+      name="com.google.firebase:firebase-auth-interop:20.0.0@aar"
+      jars="/home/weslychiam/.gradle/caches/transforms-3/7725913a81a78e37a8b2988469eb1178/transformed/jetified-firebase-auth-interop-20.0.0/jars/classes.jar"
+      resolved="com.google.firebase:firebase-auth-interop:20.0.0"
+      folder="/home/weslychiam/.gradle/caches/transforms-3/7725913a81a78e37a8b2988469eb1178/transformed/jetified-firebase-auth-interop-20.0.0"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -348,10 +400,36 @@
       externalAnnotations="annotations.zip"
       proguardRules="proguard.txt"/>
   <library
+      name="androidx.browser:browser:1.0.0@aar"
+      jars="/home/weslychiam/.gradle/caches/transforms-3/607a3a369849b88aaa63154fe2f2b488/transformed/browser-1.0.0/jars/classes.jar"
+      resolved="androidx.browser:browser:1.0.0"
+      folder="/home/weslychiam/.gradle/caches/transforms-3/607a3a369849b88aaa63154fe2f2b488/transformed/browser-1.0.0"
+      manifest="AndroidManifest.xml"
+      resFolder="res"
+      assetsFolder="assets"
+      lintJar="lint.jar"
+      publicResources="public.txt"
+      symbolFile="R.txt"
+      externalAnnotations="annotations.zip"
+      proguardRules="proguard.txt"/>
+  <library
       name="androidx.fragment:fragment:1.1.0@aar"
       jars="/home/weslychiam/.gradle/caches/transforms-3/ccfaf548e420f86c8a897a1484803168/transformed/fragment-1.1.0/jars/classes.jar"
       resolved="androidx.fragment:fragment:1.1.0"
       folder="/home/weslychiam/.gradle/caches/transforms-3/ccfaf548e420f86c8a897a1484803168/transformed/fragment-1.1.0"
+      manifest="AndroidManifest.xml"
+      resFolder="res"
+      assetsFolder="assets"
+      lintJar="lint.jar"
+      publicResources="public.txt"
+      symbolFile="R.txt"
+      externalAnnotations="annotations.zip"
+      proguardRules="proguard.txt"/>
+  <library
+      name="androidx.legacy:legacy-support-core-ui:1.0.0@aar"
+      jars="/home/weslychiam/.gradle/caches/transforms-3/419275eb48be57b3a0481a9300bad8a0/transformed/legacy-support-core-ui-1.0.0/jars/classes.jar"
+      resolved="androidx.legacy:legacy-support-core-ui:1.0.0"
+      folder="/home/weslychiam/.gradle/caches/transforms-3/419275eb48be57b3a0481a9300bad8a0/transformed/legacy-support-core-ui-1.0.0"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -413,10 +491,75 @@
       externalAnnotations="annotations.zip"
       proguardRules="proguard.txt"/>
   <library
+      name="androidx.coordinatorlayout:coordinatorlayout:1.0.0@aar"
+      jars="/home/weslychiam/.gradle/caches/transforms-3/bf15d40ce3cf3a6d3fad904da66b1bf7/transformed/coordinatorlayout-1.0.0/jars/classes.jar"
+      resolved="androidx.coordinatorlayout:coordinatorlayout:1.0.0"
+      folder="/home/weslychiam/.gradle/caches/transforms-3/bf15d40ce3cf3a6d3fad904da66b1bf7/transformed/coordinatorlayout-1.0.0"
+      manifest="AndroidManifest.xml"
+      resFolder="res"
+      assetsFolder="assets"
+      lintJar="lint.jar"
+      publicResources="public.txt"
+      symbolFile="R.txt"
+      externalAnnotations="annotations.zip"
+      proguardRules="proguard.txt"/>
+  <library
+      name="androidx.drawerlayout:drawerlayout:1.0.0@aar"
+      jars="/home/weslychiam/.gradle/caches/transforms-3/d42631aadf590958970f852323d02beb/transformed/drawerlayout-1.0.0/jars/classes.jar"
+      resolved="androidx.drawerlayout:drawerlayout:1.0.0"
+      folder="/home/weslychiam/.gradle/caches/transforms-3/d42631aadf590958970f852323d02beb/transformed/drawerlayout-1.0.0"
+      manifest="AndroidManifest.xml"
+      resFolder="res"
+      assetsFolder="assets"
+      lintJar="lint.jar"
+      publicResources="public.txt"
+      symbolFile="R.txt"
+      externalAnnotations="annotations.zip"
+      proguardRules="proguard.txt"/>
+  <library
+      name="androidx.slidingpanelayout:slidingpanelayout:1.0.0@aar"
+      jars="/home/weslychiam/.gradle/caches/transforms-3/85810fd0872ca3d8e22de74f95e65e6e/transformed/slidingpanelayout-1.0.0/jars/classes.jar"
+      resolved="androidx.slidingpanelayout:slidingpanelayout:1.0.0"
+      folder="/home/weslychiam/.gradle/caches/transforms-3/85810fd0872ca3d8e22de74f95e65e6e/transformed/slidingpanelayout-1.0.0"
+      manifest="AndroidManifest.xml"
+      resFolder="res"
+      assetsFolder="assets"
+      lintJar="lint.jar"
+      publicResources="public.txt"
+      symbolFile="R.txt"
+      externalAnnotations="annotations.zip"
+      proguardRules="proguard.txt"/>
+  <library
       name="androidx.customview:customview:1.0.0@aar"
       jars="/home/weslychiam/.gradle/caches/transforms-3/2a20eada403edeb29937a4889a07de90/transformed/customview-1.0.0/jars/classes.jar"
       resolved="androidx.customview:customview:1.0.0"
       folder="/home/weslychiam/.gradle/caches/transforms-3/2a20eada403edeb29937a4889a07de90/transformed/customview-1.0.0"
+      manifest="AndroidManifest.xml"
+      resFolder="res"
+      assetsFolder="assets"
+      lintJar="lint.jar"
+      publicResources="public.txt"
+      symbolFile="R.txt"
+      externalAnnotations="annotations.zip"
+      proguardRules="proguard.txt"/>
+  <library
+      name="androidx.swiperefreshlayout:swiperefreshlayout:1.0.0@aar"
+      jars="/home/weslychiam/.gradle/caches/transforms-3/a2df4cd0b49ac84fa2c88e32495414f6/transformed/swiperefreshlayout-1.0.0/jars/classes.jar"
+      resolved="androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
+      folder="/home/weslychiam/.gradle/caches/transforms-3/a2df4cd0b49ac84fa2c88e32495414f6/transformed/swiperefreshlayout-1.0.0"
+      manifest="AndroidManifest.xml"
+      resFolder="res"
+      assetsFolder="assets"
+      lintJar="lint.jar"
+      publicResources="public.txt"
+      symbolFile="R.txt"
+      externalAnnotations="annotations.zip"
+      proguardRules="proguard.txt"/>
+  <library
+      name="androidx.asynclayoutinflater:asynclayoutinflater:1.0.0@aar"
+      jars="/home/weslychiam/.gradle/caches/transforms-3/1cbe82cc60686ac3e5ef878116d8cf93/transformed/asynclayoutinflater-1.0.0/jars/classes.jar"
+      resolved="androidx.asynclayoutinflater:asynclayoutinflater:1.0.0"
+      folder="/home/weslychiam/.gradle/caches/transforms-3/1cbe82cc60686ac3e5ef878116d8cf93/transformed/asynclayoutinflater-1.0.0"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -460,6 +603,19 @@
       jars="/home/weslychiam/.gradle/caches/transforms-3/fd289ed3103cfaadec90d64bef56a7b7/transformed/jetified-firebase-components-17.0.0/jars/classes.jar"
       resolved="com.google.firebase:firebase-components:17.0.0"
       folder="/home/weslychiam/.gradle/caches/transforms-3/fd289ed3103cfaadec90d64bef56a7b7/transformed/jetified-firebase-components-17.0.0"
+      manifest="AndroidManifest.xml"
+      resFolder="res"
+      assetsFolder="assets"
+      lintJar="lint.jar"
+      publicResources="public.txt"
+      symbolFile="R.txt"
+      externalAnnotations="annotations.zip"
+      proguardRules="proguard.txt"/>
+  <library
+      name="androidx.localbroadcastmanager:localbroadcastmanager:1.0.0@aar"
+      jars="/home/weslychiam/.gradle/caches/transforms-3/3ca0477991a27d35fb242b9a89538304/transformed/localbroadcastmanager-1.0.0/jars/classes.jar"
+      resolved="androidx.localbroadcastmanager:localbroadcastmanager:1.0.0"
+      folder="/home/weslychiam/.gradle/caches/transforms-3/3ca0477991a27d35fb242b9a89538304/transformed/localbroadcastmanager-1.0.0"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -529,6 +685,32 @@
       jars="/home/weslychiam/.gradle/caches/modules-2/files-2.1/androidx.lifecycle/lifecycle-common/2.2.0/4ef09a745007778eef83b92f8f23987a8ea59496/lifecycle-common-2.2.0.jar"
       resolved="androidx.lifecycle:lifecycle-common:2.2.0"/>
   <library
+      name="androidx.interpolator:interpolator:1.0.0@aar"
+      jars="/home/weslychiam/.gradle/caches/transforms-3/9983bd3361ae632f05d664d3e9fc2cf2/transformed/interpolator-1.0.0/jars/classes.jar"
+      resolved="androidx.interpolator:interpolator:1.0.0"
+      folder="/home/weslychiam/.gradle/caches/transforms-3/9983bd3361ae632f05d664d3e9fc2cf2/transformed/interpolator-1.0.0"
+      manifest="AndroidManifest.xml"
+      resFolder="res"
+      assetsFolder="assets"
+      lintJar="lint.jar"
+      publicResources="public.txt"
+      symbolFile="R.txt"
+      externalAnnotations="annotations.zip"
+      proguardRules="proguard.txt"/>
+  <library
+      name="androidx.lifecycle:lifecycle-viewmodel:2.1.0@aar"
+      jars="/home/weslychiam/.gradle/caches/transforms-3/e5174bafc6fdf3fb69fffb7bc88c0cb2/transformed/lifecycle-viewmodel-2.1.0/jars/classes.jar"
+      resolved="androidx.lifecycle:lifecycle-viewmodel:2.1.0"
+      folder="/home/weslychiam/.gradle/caches/transforms-3/e5174bafc6fdf3fb69fffb7bc88c0cb2/transformed/lifecycle-viewmodel-2.1.0"
+      manifest="AndroidManifest.xml"
+      resFolder="res"
+      assetsFolder="assets"
+      lintJar="lint.jar"
+      publicResources="public.txt"
+      symbolFile="R.txt"
+      externalAnnotations="annotations.zip"
+      proguardRules="proguard.txt"/>
+  <library
       name="androidx.arch.core:core-runtime:2.0.0@aar"
       jars="/home/weslychiam/.gradle/caches/transforms-3/6a9c7be5fb54116d8da6339b918a8893/transformed/core-runtime-2.0.0/jars/classes.jar"
       resolved="androidx.arch.core:core-runtime:2.0.0"
@@ -546,19 +728,6 @@
       jars="/home/weslychiam/.gradle/caches/modules-2/files-2.1/androidx.arch.core/core-common/2.1.0/b3152fc64428c9354344bd89848ecddc09b6f07e/core-common-2.1.0.jar"
       resolved="androidx.arch.core:core-common:2.1.0"/>
   <library
-      name="androidx.lifecycle:lifecycle-viewmodel:2.1.0@aar"
-      jars="/home/weslychiam/.gradle/caches/transforms-3/e5174bafc6fdf3fb69fffb7bc88c0cb2/transformed/lifecycle-viewmodel-2.1.0/jars/classes.jar"
-      resolved="androidx.lifecycle:lifecycle-viewmodel:2.1.0"
-      folder="/home/weslychiam/.gradle/caches/transforms-3/e5174bafc6fdf3fb69fffb7bc88c0cb2/transformed/lifecycle-viewmodel-2.1.0"
-      manifest="AndroidManifest.xml"
-      resFolder="res"
-      assetsFolder="assets"
-      lintJar="lint.jar"
-      publicResources="public.txt"
-      symbolFile="R.txt"
-      externalAnnotations="annotations.zip"
-      proguardRules="proguard.txt"/>
-  <library
       name="androidx.documentfile:documentfile:1.0.0@aar"
       jars="/home/weslychiam/.gradle/caches/transforms-3/4f3c1c225b217a7ae76e824627609e69/transformed/documentfile-1.0.0/jars/classes.jar"
       resolved="androidx.documentfile:documentfile:1.0.0"
@@ -572,10 +741,10 @@
       externalAnnotations="annotations.zip"
       proguardRules="proguard.txt"/>
   <library
-      name="androidx.localbroadcastmanager:localbroadcastmanager:1.0.0@aar"
-      jars="/home/weslychiam/.gradle/caches/transforms-3/3ca0477991a27d35fb242b9a89538304/transformed/localbroadcastmanager-1.0.0/jars/classes.jar"
-      resolved="androidx.localbroadcastmanager:localbroadcastmanager:1.0.0"
-      folder="/home/weslychiam/.gradle/caches/transforms-3/3ca0477991a27d35fb242b9a89538304/transformed/localbroadcastmanager-1.0.0"
+      name="androidx.print:print:1.0.0@aar"
+      jars="/home/weslychiam/.gradle/caches/transforms-3/d7e0723b6475c65f717e9485eb08ebe7/transformed/print-1.0.0/jars/classes.jar"
+      resolved="androidx.print:print:1.0.0"
+      folder="/home/weslychiam/.gradle/caches/transforms-3/d7e0723b6475c65f717e9485eb08ebe7/transformed/print-1.0.0"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -585,10 +754,10 @@
       externalAnnotations="annotations.zip"
       proguardRules="proguard.txt"/>
   <library
-      name="androidx.print:print:1.0.0@aar"
-      jars="/home/weslychiam/.gradle/caches/transforms-3/d7e0723b6475c65f717e9485eb08ebe7/transformed/print-1.0.0/jars/classes.jar"
-      resolved="androidx.print:print:1.0.0"
-      folder="/home/weslychiam/.gradle/caches/transforms-3/d7e0723b6475c65f717e9485eb08ebe7/transformed/print-1.0.0"
+      name="androidx.cursoradapter:cursoradapter:1.0.0@aar"
+      jars="/home/weslychiam/.gradle/caches/transforms-3/ae5ad02e8be0d9801151e967d8cb01cf/transformed/cursoradapter-1.0.0/jars/classes.jar"
+      resolved="androidx.cursoradapter:cursoradapter:1.0.0"
+      folder="/home/weslychiam/.gradle/caches/transforms-3/ae5ad02e8be0d9801151e967d8cb01cf/transformed/cursoradapter-1.0.0"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"

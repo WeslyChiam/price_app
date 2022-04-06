@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:price_app/const/color.dart';
 import 'package:price_app/const/text.dart';
@@ -5,125 +6,205 @@ import 'package:price_app/pages/mainPage.dart';
 import 'package:price_app/pages/regPage.dart';
 
 class loginPage extends StatefulWidget {
+  const loginPage({Key? key}) : super(key: key);
+
   @override
-  State<loginPage> createState() => _loginPageState();
+  _loginPageState createState() => _loginPageState();
 }
 
 class _loginPageState extends State<loginPage> {
-  final loginTextController = TextEditingController();
-  final passwordTextController = TextEditingController();
-  bool _passwordVisible = true;
+  // form key
+  final _formKey = GlobalKey<FormState>();
+
+  // editing controller
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  // firebase
+  final _auth = FirebaseAuth.instance;
+
+  // string for displaying the error Message
+  String? errorMessage;
 
   @override
   Widget build(BuildContext context) {
+    //email field
+    final emailField = TextFormField(
+        autofocus: false,
+        controller: emailController,
+        keyboardType: TextInputType.emailAddress,
+        validator: (value) {
+          if (value!.isEmpty) {
+            return ("Please Enter Your Email");
+          }
+          // reg expression for email validation
+          if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
+              .hasMatch(value)) {
+            return ("Please Enter a valid email");
+          }
+          return null;
+        },
+        onSaved: (value) {
+          emailController.text = value!;
+        },
+        textInputAction: TextInputAction.next,
+        decoration: InputDecoration(
+          prefixIcon: const Icon(Icons.mail),
+          contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+          hintText: "Email",
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+        ));
+
+    //password field
+    final passwordField = TextFormField(
+        autofocus: false,
+        controller: passwordController,
+        obscureText: true,
+        validator: (value) {
+          RegExp regex = RegExp(r'^.{6,}$');
+          if (value!.isEmpty) {
+            return ("Password is required for login");
+          }
+          if (!regex.hasMatch(value)) {
+            return ("Enter Valid Password(Min. 6 Character)");
+          }
+        },
+        onSaved: (value) {
+          passwordController.text = value!;
+        },
+        textInputAction: TextInputAction.done,
+        decoration: InputDecoration(
+          prefixIcon: const Icon(Icons.vpn_key),
+          contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+          hintText: "Password",
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+        ));
+
+    final loginButton = Material(
+      elevation: 5,
+      borderRadius: BorderRadius.circular(30),
+      color: blue,
+      child: MaterialButton(
+          padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+          minWidth: MediaQuery.of(context).size.width,
+          onPressed: () {
+            try {
+              signIn(emailController.text, passwordController.text);
+            } catch (e) {
+              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                  content: Text('Something Went Wrong! Please retry again.')));
+            }
+          },
+          child: const Text(
+            "Login",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                fontSize: 20, color: white, fontWeight: FontWeight.bold),
+          )),
+    );
+
     return Scaffold(
+      backgroundColor: white,
       appBar: AppBar(),
       body: Center(
-        child: Column(
-          children: [
-            Container(
-              height: 150.0,
-              width: 190.0,
-              padding: const EdgeInsets.only(
-                top: 40.0,
-              ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(200),
-              ),
-              child: const Center(
-                child: Text('Place Logo Here'),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: defaultText('WELCOME', 20.0, true, false, true),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: TextField(
-                controller: loginTextController,
-                decoration: const InputDecoration(
-                  prefix: Icon(Icons.login),
-                  border: OutlineInputBorder(),
-                  labelText: 'E-mail',
-                  hintText: 'example@mail.com',
+        child: SingleChildScrollView(
+          child: Container(
+            color: white,
+            child: Padding(
+              padding: const EdgeInsets.all(36.0),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    const SizedBox(
+                      height: 200,
+                      child: Text('Place Logo Here'),
+                      // child: Image.asset(
+                      //   "assets/logo.png",
+                      //   fit: BoxFit.contain,
+                      // ),
+                    ),
+                    const SizedBox(height: 45),
+                    emailField,
+                    const SizedBox(height: 25),
+                    passwordField,
+                    const SizedBox(height: 35),
+                    loginButton,
+                    const SizedBox(height: 15),
+                    Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          const Text("Don't have an account? "),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const regPaper()));
+                            },
+                            child: const Text(
+                              "SignUp",
+                              style: TextStyle(
+                                color: blue,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15,
+                              ),
+                            ),
+                          )
+                        ])
+                  ],
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: TextField(
-                obscureText: _passwordVisible,
-                controller: passwordTextController,
-                decoration: InputDecoration(
-                  border: const OutlineInputBorder(),
-                  labelText: 'Password',
-                  hintText: 'Password',
-                  suffixIcon: InkWell(
-                    onTap: _togglePassword,
-                    child: _passwordVisible
-                        ? const Icon(Icons.visibility)
-                        : const Icon(Icons.visibility_off),
-                  ),
-                ),
-              ),
-            ),
-            Container(
-              height: 50.0,
-              width: 250.0,
-              decoration: BoxDecoration(
-                color: blue,
-                borderRadius: BorderRadius.circular(20.0),
-              ),
-              child: TextButton(
-                onPressed: () {
-                  Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(
-                        builder: (context) => mainPage(),
-                      ),
-                      (route) => false);
-                },
-                child: defaultText('LOGIN', 25.0, false, false, false),
-              ),
-            ),
-            Container(
-              height: 50.0,
-              width: 250.0,
-              decoration: BoxDecoration(
-                color: blue,
-                borderRadius: BorderRadius.circular(20.0),
-              ),
-              child: TextButton(
-                onPressed: () {
-                  Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(
-                        builder: (context) => regPage(),
-                      ),
-                      (route) => false);
-                },
-                child: defaultText(
-                    'New Member? | Register Now', 15.0, false, false, false),
-              ),
-            ),
-            TextButton(
-              onPressed: () {},
-              child: const Text(
-                'Forgot Password',
-                style: TextStyle(
-                  color: blue,
-                  fontSize: 15.0,
-                ),
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );
   }
 
-  void _togglePassword() {
-    setState(() {
-      _passwordVisible = !_passwordVisible;
-    });
+  // login function
+  void signIn(String email, String password) async {
+    if (_formKey.currentState!.validate()) {
+      try {
+        await _auth
+            .signInWithEmailAndPassword(email: email, password: password)
+            .then((uid) {
+          Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (context) => const mainPage()));
+        });
+      } on FirebaseAuthException catch (error) {
+        switch (error.code) {
+          case "invalid-email":
+            errorMessage = "Invalid password and/or email.";
+
+            break;
+          case "wrong-password":
+            errorMessage = "Invalid password and/or email.";
+            break;
+          case "user-not-found":
+            errorMessage = "User with this email doesn't exist.";
+            break;
+          case "user-disabled":
+            errorMessage = "User with this email has been disabled.";
+            break;
+          case "too-many-requests":
+            errorMessage = "Too many requests";
+            break;
+          case "operation-not-allowed":
+            errorMessage = "Signing in with Email and Password is not enabled.";
+            break;
+          default:
+            errorMessage = "An undefined Error happened.";
+        }
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(errorMessage!)));
+      }
+    }
   }
 }
