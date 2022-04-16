@@ -267,10 +267,6 @@ class _regPaperState extends State<regPaper> {
   }
 
   postDetailsToFirestore() async {
-    // calling our firestore
-    // calling our user model
-    // sedning these values
-
     FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
     User? user = _auth.currentUser;
 
@@ -281,13 +277,15 @@ class _regPaperState extends State<regPaper> {
     userModel.uid = user.uid;
     userModel.firstName = firstNameEditingController.text;
     userModel.secondName = secondNameEditingController.text;
+    userModel.displayName = '${user.displayName}';
+    userModel.authority = 'Level-1';
 
     await firebaseFirestore
         .collection("users")
         .doc(user.uid)
         .set(userModel.toMap());
-    ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Account created successfully :) ")));
+    // ScaffoldMessenger.of(context).showSnackBar(
+    //     const SnackBar(content: Text("Account created successfully :) ")));
 
     Navigator.pushAndRemoveUntil(
         (context),
