@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:price_app/const/color.dart';
-import 'package:price_app/const/text.dart';
 import 'package:price_app/pages/mainPage.dart';
 import 'package:price_app/pages/regPage.dart';
 

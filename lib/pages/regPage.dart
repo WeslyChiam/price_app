@@ -5,6 +5,7 @@ import 'package:price_app/model/user_model.dart';
 import 'package:price_app/pages/mainPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:price_app/pages/tncPage.dart';
 
 class regPaper extends StatefulWidget {
   const regPaper({Key? key}) : super(key: key);
@@ -27,6 +28,15 @@ class _regPaperState extends State<regPaper> {
   final emailEditingController = TextEditingController();
   final passwordEditingController = TextEditingController();
   final confirmPasswordEditingController = TextEditingController();
+
+  void dispose() {
+    firstNameEditingController.dispose();
+    secondNameEditingController.dispose();
+    emailEditingController.dispose();
+    passwordEditingController.dispose();
+    confirmPasswordEditingController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -163,6 +173,13 @@ class _regPaperState extends State<regPaper> {
           ),
         ));
 
+    final tncLink = GestureDetector(
+      child: const Text(
+          "By Signing Up, you are agreed to Terms and Condition of this application"),
+      onTap: () => Navigator.push(
+          context, MaterialPageRoute(builder: (context) => const tncPage())),
+    );
+
     //signup button
     final signUpButton = Material(
         elevation: 5,
@@ -198,12 +215,14 @@ class _regPaperState extends State<regPaper> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    SizedBox(
-                        height: 180,
-                        child: Image.asset(
-                          "assets/logo.png",
-                          fit: BoxFit.contain,
-                        )),
+                    const SizedBox(
+                      height: 200,
+                      child: Text('Place Logo Here'),
+                      // child: Image.asset(
+                      //   "assets/logo.png",
+                      //   fit: BoxFit.contain,
+                      // ),
+                    ),
                     const SizedBox(height: 45),
                     firstNameField,
                     const SizedBox(height: 20),
@@ -215,6 +234,27 @@ class _regPaperState extends State<regPaper> {
                     const SizedBox(height: 20),
                     confirmPasswordField,
                     const SizedBox(height: 20),
+                    tncLink,
+                    const SizedBox(height: 20),
+
+                    // Container(
+                    //   margin: const EdgeInsets.symmetric(vertical: 16.0),
+                    //   child: Column(
+                    //     children: [
+                    //       const Text(
+                    //           ,
+                    //           style: TextStyle(color: lightBlack)),
+                    //       GestureDetector(
+                    //         onTap: () {
+                    //           Navigator.push(
+                    //               context,
+                    //               MaterialPageRoute(
+                    //                   builder: (context) => const tncPage()));
+                    //         },
+                    //       )
+                    //     ],
+                    //   ),
+                    // ),
                     signUpButton,
                     const SizedBox(height: 15),
                   ],
@@ -267,10 +307,6 @@ class _regPaperState extends State<regPaper> {
   }
 
   postDetailsToFirestore() async {
-    // calling our firestore
-    // calling our user model
-    // sedning these values
-
     FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
     User? user = _auth.currentUser;
 
@@ -281,13 +317,15 @@ class _regPaperState extends State<regPaper> {
     userModel.uid = user.uid;
     userModel.firstName = firstNameEditingController.text;
     userModel.secondName = secondNameEditingController.text;
+    userModel.displayName = '${user.displayName}';
+    userModel.authority = 'Level-1';
 
     await firebaseFirestore
         .collection("users")
         .doc(user.uid)
         .set(userModel.toMap());
-    ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Account created successfully :) ")));
+    // ScaffoldMessenger.of(context).showSnackBar(
+    //     const SnackBar(content: Text("Account created successfully :) ")));
 
     Navigator.pushAndRemoveUntil(
         (context),
