@@ -26,8 +26,8 @@ class _textFormFieldInputState extends State<textFormFieldInput> {
   bool auth = false;
 
   // RegExp regex = RegExp(r'^[a-zA-Z0-9_ ]{3,50}$');
-  RegExp regex = RegExp(r'^[a-zA-Z0-9 ]([\w -]*[a-zA-Z0-9]){3,50}?$');
-  RegExp intregex = RegExp(r'^(?:-?(?:0|[1-9][0-9]*))$');
+  RegExp regex = RegExp(r'^[a-zA-Z0-9 ]([\w -]*[a-zA-Z0-9]){2,50}?$');
+  RegExp intregex = RegExp(r'^(?:-?(?:0|[1-9.,][0-9.,]*))$');
 
   final uid = FirebaseAuth.instance.currentUser!.uid;
 
@@ -233,72 +233,59 @@ class _textFormFieldInputState extends State<textFormFieldInput> {
     );
   }
 
-  _fetchAuth() async {
-    FirebaseFirestore.instance.collection('users').doc(uid).get().then((value) {
-      setState(() {
-        auth = value.data()!['authority'];
-      });
-    });
-  }
-
-  Future addTrack(
-      String pid,
-      String name,
-      String price,
-      String distributor,
-      String material,
-      String category,
-      String date,
-      String dateNtime,
-      bool approve) async {
-    String id = 'ADD' + pid + date;
+  Future addTrack(String pid, String name, String price, String distributor,
+      String material, String category, String date, bool approve) async {
+    DateTime now = DateTime.now();
+    String time =
+        now.day.toString() + now.month.toString() + now.year.toString();
+    String id = 'ADD' + name + time;
     DocumentReference track =
         FirebaseFirestore.instance.collection('tracks').doc(id);
     String uid = FirebaseAuth.instance.currentUser!.uid;
-    FirebaseFirestore.instance.runTransaction((transaction) async {
-      if (otherCategory == true) {
-        track.set({
-          'pid': pid,
-          'id': id,
-          'productName': name,
-          'price': price,
-          'distributor': distributor,
-          'material': material,
-          'category': productDDValue,
-          'wroteBy': uid,
-          'action': 'ADD',
-          'writtenDate': date,
-          'approve': approve,
-        });
-      } else {
-        track.set({
-          'pid': pid,
-          'id': id,
-          'productName': name,
-          'price': price,
-          'distributor': distributor,
-          'material': material,
-          'category': productDDValue,
-          'wroteBy': uid,
-          'action': 'ADD',
-          'writtenDate': date,
-          'approve': approve,
-        });
-        FirebaseFirestore.instance
-            .collection('tracks/${track.id}')
-            .doc(otherTextController.text)
-            .set({
-          'other': otherTextController.text,
-          'details': otherDetailTextController.text,
-        });
-      }
 
-      // await transaction.update(track_ref, data)
-    });
+    checkCounter();
+    CollectionReference track_ref =
+        FirebaseFirestore.instance.collection('tracks');
+    if (otherCategory == true) {
+      track.set({
+        'pid': pid,
+        'id': id,
+        'productName': name,
+        'price': price,
+        'distributor': distributor,
+        'material': material,
+        'category': productDDValue,
+        'wroteBy': uid,
+        'action': 'ADD',
+        'writtenDate': date,
+        'approve': approve,
+      });
+      FirebaseFirestore.instance
+          .collection('tracks')
+          .doc('$id/otherAtr/${otherTextController.text}')
+          .set({
+        'atrName': otherTextController.text,
+        'atrDetail': otherDetailTextController.text,
+      });
+    } else {
+      track.set({
+        'pid': pid,
+        'id': id,
+        'productName': name,
+        'price': price,
+        'distributor': distributor,
+        'material': material,
+        'category': productDDValue,
+        'wroteBy': uid,
+        'action': 'ADD',
+        'writtenDate': date,
+        'approve': approve,
+      });
+    }
   }
 
   Future addProduct(String pid, String name, String price, String distributor,
-      String material, String category, String date, String dateNtime) async {
+      String material, String category, String date) async {
     DocumentReference product_ref =
         FirebaseFirestore.instance.collection('products').doc(pid);
     String uid = FirebaseAuth.instance.currentUser!.uid;
@@ -333,13 +320,12 @@ class _textFormFieldInputState extends State<textFormFieldInput> {
               'category': productDDValue,
               'wroteBy': uid,
               'writtenDate': date,
-            });
-            FirebaseFirestore.instance
-                .collection('products/$pid')
-                .doc(otherTextController.text)
-                .set({
-              'other': otherTextController.text,
-              'details': otherDetailTextController.text,
+              'otherAtr': {
+                otherTextController.text: {
+                  'AtrName': otherTextController.text,
+                  'AtrDetail': otherDetailTextController.text,
+                },
+              },
             }).then((value) {
               ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(content: Text('Product added!')));
@@ -356,100 +342,131 @@ class _textFormFieldInputState extends State<textFormFieldInput> {
       });
     } catch (e) {
       ScaffoldMessenger.of(context)
-          .showSnackBar(const SnackBar(content: Text('Authority Level low')));
+          .showSnackBar(SnackBar(content: Text('Error: ${e.toString()}')));
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-        key: formKey,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            const SizedBox(height: 45.0),
-            textFormTypeInput('name', true),
-            const SizedBox(height: 20.0),
-            textFormTypeInput('price', true),
-            const SizedBox(height: 20.0),
-            textFormTypeInput('company', true),
-            const SizedBox(height: 20.0),
-            textFormTypeInput('material', true),
-            const SizedBox(height: 20.0),
-            categoryDD(),
-            const SizedBox(height: 20.0),
-            otherTextFormInput(),
-            const SizedBox(height: 20.0),
-            otherDetailTextFormInput(otherCategory),
-            const SizedBox(height: 20.0),
-            Container(
-              height: 50.0,
-              width: 250.0,
-              decoration: BoxDecoration(
-                  color: blue, borderRadius: BorderRadius.circular(20.0)),
-              child: TextButton.icon(
-                  onPressed: () async {
-                    DateTime now = DateTime.now();
-                    String date = now.day.toString() +
-                        '/' +
-                        now.month.toString() +
-                        '/' +
-                        now.year.toString();
-                    String dateNtime = date +
-                        '' +
-                        now.hour.toString() +
-                        ':' +
-                        now.minute.toString();
-                    String pid = productDDValue + nameTextController.text;
-                    if (formKey.currentState!.validate()) {
-                      if (auth == true) {
-                        await addTrack(
-                            pid,
-                            nameTextController.text,
-                            priceNumController.text,
-                            companyTextController.text,
-                            materialTextController.text,
-                            productDDValue,
-                            date,
-                            dateNtime,
-                            true);
-                        await addProduct(
-                            pid,
-                            nameTextController.text,
-                            priceNumController.text,
-                            companyTextController.text,
-                            materialTextController.text,
-                            productDDValue,
-                            date,
-                            dateNtime);
-                      } else {
-                        await addTrack(
-                            pid,
-                            nameTextController.text,
-                            priceNumController.text,
-                            companyTextController.text,
-                            materialTextController.text,
-                            productDDValue,
-                            date,
-                            dateNtime,
-                            false);
-                        ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                                content: Text('Your request is now pending')));
-                      }
-                    }
-                  },
-                  icon: const Icon(
-                    Icons.save_outlined,
-                    color: white,
-                  ),
-                  label: const Text(
-                    'SAVE',
-                    style: TextStyle(color: white),
-                  )),
-            ),
-          ],
-        ));
+    CollectionReference users = FirebaseFirestore.instance.collection('users');
+    return FutureBuilder(
+        future: users.doc(uid).get(),
+        builder:
+            (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+          if (snapshot.hasError) {
+            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                content: Text("Something went wrong. Please try again.")));
+            Navigator.pop(context);
+          }
+          if (snapshot.connectionState == ConnectionState.done) {
+            Map<String, dynamic> data =
+                snapshot.data!.data() as Map<String, dynamic>;
+            bool auth = data['authority'];
+            return Form(
+                key: formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    const SizedBox(height: 45.0),
+                    textFormTypeInput('name', true),
+                    const SizedBox(height: 20.0),
+                    textFormTypeInput('price', true),
+                    const SizedBox(height: 20.0),
+                    textFormTypeInput('company', true),
+                    const SizedBox(height: 20.0),
+                    textFormTypeInput('material', true),
+                    const SizedBox(height: 20.0),
+                    categoryDD(),
+                    const SizedBox(height: 20.0),
+                    otherTextFormInput(),
+                    const SizedBox(height: 20.0),
+                    otherDetailTextFormInput(otherCategory),
+                    const SizedBox(height: 20.0),
+                    Container(
+                      height: 50.0,
+                      width: 250.0,
+                      decoration: BoxDecoration(
+                          color: blue,
+                          borderRadius: BorderRadius.circular(20.0)),
+                      child: TextButton.icon(
+                          onPressed: () async {
+                            DateTime now = DateTime.now();
+                            String date = now.day.toString() +
+                                '/' +
+                                now.month.toString() +
+                                '/' +
+                                now.year.toString();
+
+                            String pid =
+                                productDDValue + nameTextController.text;
+                            if (formKey.currentState!.validate()) {
+                              final auth = FirebaseFirestore.instance
+                                  .collection('users')
+                                  .doc(uid);
+
+                              //
+                              // ScaffoldMessenger.of(context).showSnackBar(
+                              //     SnackBar(content: Text(auth.toString())));
+                              if (data['authority'] == true) {
+                                await addTrack(
+                                    pid,
+                                    nameTextController.text,
+                                    priceNumController.text,
+                                    companyTextController.text,
+                                    materialTextController.text,
+                                    productDDValue,
+                                    date,
+                                    true);
+                                await addProduct(
+                                  pid,
+                                  nameTextController.text,
+                                  priceNumController.text,
+                                  companyTextController.text,
+                                  materialTextController.text,
+                                  productDDValue,
+                                  date,
+                                );
+                              } else {
+                                await addTrack(
+                                    pid,
+                                    nameTextController.text,
+                                    priceNumController.text,
+                                    companyTextController.text,
+                                    materialTextController.text,
+                                    productDDValue,
+                                    date,
+                                    false);
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                        content: Text(
+                                            'Your request is now pending')));
+                              }
+                            }
+                          },
+                          icon: const Icon(
+                            Icons.save_outlined,
+                            color: white,
+                          ),
+                          label: const Text(
+                            'SAVE',
+                            style: TextStyle(color: white),
+                          )),
+                    ),
+                  ],
+                ));
+          }
+          return Container();
+        });
   }
+}
+
+checkCounter() {
+  CollectionReference track = FirebaseFirestore.instance.collection('tracks');
+  return FutureBuilder(
+      future: track.doc('otherAtr').get(),
+      builder:
+          (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+        return Container();
+      });
 }

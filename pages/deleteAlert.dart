@@ -17,9 +17,14 @@ class _deleteAlertState extends State<deleteAlert> {
 
   _fetchAuth() async {
     FirebaseFirestore.instance.collection('users').doc(uid).get().then((value) {
-      setState(() {
-        auth = value.data()!['authority'];
-      });
+      if (value.data()!['authority'] == true) {
+        return true;
+      } else {
+        return false;
+      }
+      // setState(() {
+      //   auth = value.data()!['authority'];
+      // });
     });
   }
 
@@ -53,37 +58,55 @@ class _deleteAlertState extends State<deleteAlert> {
 
   @override
   Widget build(BuildContext context) {
+    CollectionReference users = FirebaseFirestore.instance.collection('users');
     String name = widget.name;
     String pid = widget.pid;
-    return AlertDialog(
-      title: Text('Delete $name?'),
-      content: Text(
-          "This action will remove ${widget.name} from database. Doing so, there is no returning back\nAre you sure?"),
-      actions: <Widget>[
-        TextButton.icon(
-            onPressed: () async {
-              DateTime now = DateTime.now();
-              String date = now.day.toString() +
-                  '/' +
-                  now.month.toString() +
-                  '/' +
-                  now.year.toString();
-              if (auth == true) {
-                await addTrack(pid, uid, date, true);
-                await deleteProduct(pid);
-              } else {
-                await addTrack(pid, uid, date, false);
-                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                    content: Text('Your request is now pending')));
-              }
-            },
-            icon: const Icon(Icons.check_outlined),
-            label: const Text('Yes')),
-        TextButton.icon(
-            onPressed: () => Navigator.pop(context, 'Cancel'),
-            icon: const Icon(Icons.cancel_outlined),
-            label: const Text('Cancel'))
-      ],
-    );
+    return FutureBuilder(
+        future: users.doc(uid).get(),
+        builder:
+            (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+          if (snapshot.connectionState == ConnectionState.done &&
+              snapshot.hasData) {
+            Map<String, dynamic> data =
+                snapshot.data!.data() as Map<String, dynamic>;
+            bool auth = data['authority'];
+            return AlertDialog(
+              title: Text('Delete $name?'),
+              content: Text(
+                  "This action will remove ${widget.name} from database. Doing so, there is no returning back\nAre you sure?"),
+              actions: <Widget>[
+                TextButton.icon(
+                    onPressed: () async {
+                      DateTime now = DateTime.now();
+                      String date = now.day.toString() +
+                          '/' +
+                          now.month.toString() +
+                          '/' +
+                          now.year.toString();
+                      if (data['authority'] == true) {
+                        await addTrack(pid, uid, date, true);
+                        await deleteProduct(pid);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text('Succesfully remove product')));
+                      } else {
+                        await addTrack(pid, uid, date, false);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text('Your request is now pending')));
+                      }
+                      Navigator.pop(context);
+                    },
+                    icon: const Icon(Icons.check_outlined),
+                    label: const Text('Yes')),
+                TextButton.icon(
+                    onPressed: () => Navigator.pop(context, 'Cancel'),
+                    icon: const Icon(Icons.cancel_outlined),
+                    label: const Text('Cancel'))
+              ],
+            );
+          }
+          return Container();
+        });
   }
 }

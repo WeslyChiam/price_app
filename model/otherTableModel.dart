@@ -9,7 +9,7 @@ class otherTableModel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Stream<QuerySnapshot> _otherStream = FirebaseFirestore.instance
-        .collection('products/$pid/other')
+        .collection('products/$pid/otherAtr')
         .snapshots();
     return StreamBuilder<QuerySnapshot>(
         stream: _otherStream,
@@ -26,13 +26,13 @@ class otherTableModel extends StatelessWidget {
                   return RichText(
                       text: TextSpan(children: <TextSpan>[
                     TextSpan(
-                        text: data.docs[index]['other'],
+                        text: data.docs[index]['atrName'],
                         style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             color: black,
                             fontSize: 20)),
                     TextSpan(
-                        text: data.docs[index]['detail'],
+                        text: data.docs[index]['atrDetail'],
                         style: const TextStyle(fontSize: 20))
                   ]));
                 });
@@ -51,8 +51,9 @@ class otherTrackTableModel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Stream<QuerySnapshot> _otherStream =
-        FirebaseFirestore.instance.collection('tracks/$pid/other').snapshots();
+    final Stream<QuerySnapshot> _otherStream = FirebaseFirestore.instance
+        .collection('tracks/$pid/otherAtr')
+        .snapshots();
     return StreamBuilder<QuerySnapshot>(
         stream: _otherStream,
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -75,13 +76,13 @@ class otherTrackTableModel extends StatelessWidget {
                   return RichText(
                       text: TextSpan(children: <TextSpan>[
                     TextSpan(
-                        text: data.docs[index]['other'],
+                        text: data.docs[index]['$index/atrName'],
                         style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             color: black,
                             fontSize: 20)),
                     TextSpan(
-                        text: data.docs[index]['detail'],
+                        text: data.docs[index]['$index/atrDetail'],
                         style: const TextStyle(fontSize: 20))
                   ]));
                 });

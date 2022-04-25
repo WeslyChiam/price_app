@@ -36,27 +36,24 @@ class _recentTableState extends State<recentTable> {
           return const Text('Loading...',
               style: TextStyle(color: lightBlack, fontSize: 25.0));
         }
-        if (snapshot.connectionState == ConnectionState.done &&
-            !snapshot.hasData) {
+        if (snapshot.data == null || snapshot.hasData) {
           return const Center(
-            child: Text('No data has found. Try add a new one by pressing ' +
-                ' button'),
+            child: Text(
+                "No data has found. Try add a new one by pressing '+' button"),
           );
         }
-
-        if (snapshot.connectionState == ConnectionState.done &&
-            snapshot.hasData) {
-          final data = snapshot.requireData;
-          const String airSVG = 'assets/svg/air.svg';
-          const String otherSVG = 'assets/svg/other.svg';
-          const String pipeSVG = 'assets/svg/pipe.svg';
-          const String mechSVG = 'assets/svg/mech.svg';
-          const String elecSVG = 'assets/svg/elec.svg';
-          return DraggableScrollbar.semicircle(
-            controller: listScrollController,
-            child: ListView.builder(
-              itemCount: data.size,
-              itemBuilder: (context, index) {
+        final data = snapshot.requireData;
+        const String airSVG = 'assets/svg/air.svg';
+        const String otherSVG = 'assets/svg/other.svg';
+        const String pipeSVG = 'assets/svg/pipe.svg';
+        const String mechSVG = 'assets/svg/mech.svg';
+        const String elecSVG = 'assets/svg/elec.svg';
+        return DraggableScrollbar.semicircle(
+          controller: listScrollController,
+          child: ListView.builder(
+            itemCount: data.size,
+            itemBuilder: (context, index) {
+              if (data.size > 0) {
                 return Card(
                   child: InkWell(
                     child: Column(
@@ -218,14 +215,14 @@ class _recentTableState extends State<recentTable> {
                     },
                   ),
                 );
-              },
-            ),
-          );
-        }
+              }
 
-        return const Center(
-          child: Text(
-              'No data has found. Try add a new one by pressing ' + ' button'),
+              return const Center(
+                child: Text(
+                    "No data has found. Try add a new one by pressing '+' button"),
+              );
+            },
+          ),
         );
       },
     );

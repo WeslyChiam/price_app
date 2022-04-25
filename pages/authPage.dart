@@ -12,7 +12,7 @@ class authPage extends StatelessWidget {
       .snapshots();
 
   convertAuthLvl(data) {
-    if (data == false) {
+    if (data == 'false') {
       return 'Level-1';
     } else {
       return 'Level-2';
@@ -63,7 +63,7 @@ class authPage extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => approvePage()));
+                                    builder: (context) => const approvePage()));
                           }
                         : () {
                             ScaffoldMessenger.of(context).showSnackBar(
