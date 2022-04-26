@@ -26,13 +26,13 @@ class otherTableModel extends StatelessWidget {
                   return RichText(
                       text: TextSpan(children: <TextSpan>[
                     TextSpan(
-                        text: data.docs[index]['atrName'],
+                        text: data.docs[index]['${index.toString()}/atrName'],
                         style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             color: black,
                             fontSize: 20)),
                     TextSpan(
-                        text: data.docs[index]['atrDetail'],
+                        text: data.docs[index]['${index.toString()}/atrDetail'],
                         style: const TextStyle(fontSize: 20))
                   ]));
                 });
@@ -76,13 +76,13 @@ class otherTrackTableModel extends StatelessWidget {
                   return RichText(
                       text: TextSpan(children: <TextSpan>[
                     TextSpan(
-                        text: data.docs[index]['$index/atrName'],
+                        text: data.docs[index]['${index.toString()}/atrName'],
                         style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             color: black,
                             fontSize: 20)),
                     TextSpan(
-                        text: data.docs[index]['$index/atrDetail'],
+                        text: data.docs[index]['${index.toString()}/atrDetail'],
                         style: const TextStyle(fontSize: 20))
                   ]));
                 });

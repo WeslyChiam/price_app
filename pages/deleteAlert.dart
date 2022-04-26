@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:price_app/const/deleteTrack.dart';
 
 class deleteAlert extends StatefulWidget {
   final String pid;
@@ -13,20 +14,6 @@ class deleteAlert extends StatefulWidget {
 
 class _deleteAlertState extends State<deleteAlert> {
   final uid = FirebaseAuth.instance.currentUser!.uid;
-  bool auth = false;
-
-  _fetchAuth() async {
-    FirebaseFirestore.instance.collection('users').doc(uid).get().then((value) {
-      if (value.data()!['authority'] == true) {
-        return true;
-      } else {
-        return false;
-      }
-      // setState(() {
-      //   auth = value.data()!['authority'];
-      // });
-    });
-  }
 
   Future addTrack(String pid, String uid, String date, bool approve) async {
     String id = 'DELETE' + pid + date;
@@ -83,14 +70,18 @@ class _deleteAlertState extends State<deleteAlert> {
                           now.month.toString() +
                           '/' +
                           now.year.toString();
+                      String id = 'DELETE' + pid + date;
                       if (data['authority'] == true) {
-                        await addTrack(pid, uid, date, true);
-                        await deleteProduct(pid);
+                        // await addTrack(pid, uid, date, true);
+                        await removeTrack(id).Pending(pid, date, uid, true);
+                        await removeTrack(pid).Product();
+                        //await deleteProduct(pid);
                         ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                                 content: Text('Succesfully remove product')));
                       } else {
-                        await addTrack(pid, uid, date, false);
+                        // await addTrack(pid, uid, date, false);
+                        await removeTrack(id).Pending(pid, date, uid, true);
                         ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                                 content: Text('Your request is now pending')));

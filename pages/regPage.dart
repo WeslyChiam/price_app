@@ -41,6 +41,7 @@ class _regPaperState extends State<regPaper> {
   @override
   Widget build(BuildContext context) {
     //first name field
+    const String logo = 'assets/logo/logo.png';
     final firstNameField = TextFormField(
         autofocus: false,
         controller: firstNameEditingController,
@@ -215,9 +216,13 @@ class _regPaperState extends State<regPaper> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    const SizedBox(
+                    SizedBox(
                       height: 200,
-                      child: Text('Place Logo Here'),
+                      child: Image.asset(
+                        logo,
+                        fit: BoxFit.contain,
+                      ),
+                      // Text('Place Logo Here'),
                       // child: Image.asset(
                       //   "assets/logo.png",
                       //   fit: BoxFit.contain,

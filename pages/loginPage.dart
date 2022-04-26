@@ -24,10 +24,12 @@ class _loginPageState extends State<loginPage> {
 
   // string for displaying the error Message
   String? errorMessage;
+  bool visible = false;
 
   @override
   Widget build(BuildContext context) {
     //email field
+    const String logo = 'assets/logo/logo.png';
     final emailField = TextFormField(
         autofocus: false,
         controller: emailController,
@@ -60,7 +62,7 @@ class _loginPageState extends State<loginPage> {
     final passwordField = TextFormField(
         autofocus: false,
         controller: passwordController,
-        obscureText: true,
+        obscureText: visible,
         validator: (value) {
           RegExp regex = RegExp(r'^.{6,}$');
           if (value!.isEmpty) {
@@ -73,10 +75,18 @@ class _loginPageState extends State<loginPage> {
         onSaved: (value) {
           passwordController.text = value!;
         },
-        textInputAction: TextInputAction.done,
+        textInputAction: TextInputAction.next,
         decoration: InputDecoration(
           prefixIcon: const Icon(Icons.vpn_key),
           contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+          suffixIcon: IconButton(
+            onPressed: () {
+              setState(() {
+                visible = !visible;
+              });
+            },
+            icon: Icon(visible ? Icons.visibility : Icons.visibility_off),
+          ),
           hintText: "Password",
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
@@ -121,9 +131,13 @@ class _loginPageState extends State<loginPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    const SizedBox(
+                    SizedBox(
                       height: 200,
-                      child: Text('Place Logo Here'),
+                      child: Image.asset(
+                        logo,
+                        fit: BoxFit.contain,
+                      ),
+                      // Text('Place Logo Here'),
                       // child: Image.asset(
                       //   "assets/logo.png",
                       //   fit: BoxFit.contain,

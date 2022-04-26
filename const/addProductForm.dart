@@ -262,7 +262,7 @@ class _textFormFieldInputState extends State<textFormFieldInput> {
       });
       FirebaseFirestore.instance
           .collection('tracks')
-          .doc('$id/otherAtr/${otherTextController.text}')
+          .doc('$id/otherAtr/0')
           .set({
         'atrName': otherTextController.text,
         'atrDetail': otherDetailTextController.text,
@@ -326,6 +326,13 @@ class _textFormFieldInputState extends State<textFormFieldInput> {
                   'AtrDetail': otherDetailTextController.text,
                 },
               },
+            });
+            FirebaseFirestore.instance
+                .collection('tracks')
+                .doc('$pid/otherAtr/0')
+                .set({
+              'atrName': otherTextController.text,
+              'atrDetail': otherDetailTextController.text,
             }).then((value) {
               ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(content: Text('Product added!')));
