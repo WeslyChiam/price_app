@@ -3,8 +3,8 @@ import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:draggable_scrollbar/draggable_scrollbar.dart';
 import 'package:flutter/material.dart';
+import 'package:price_app/const/addRecord.dart';
 import 'package:price_app/const/color.dart';
-import 'package:price_app/const/copy.dart';
 import 'package:price_app/const/deleteTrack.dart';
 import 'package:price_app/const/getUser.dart';
 import 'package:price_app/model/otherTableModel.dart';
@@ -162,53 +162,10 @@ class _approvePageState extends State<approvePage> {
                                                               20)),
                                                   child: TextButton.icon(
                                                       onPressed: () {
-                                                        if (data.docs[index]
-                                                                ['otherAtr'] !=
-                                                            null) {
-                                                          copyWthOther(
-                                                              data.docs[index]
-                                                                  ['id'],
-                                                              data.docs[index]
-                                                                  ['pid'],
-                                                              data.docs[index][
-                                                                  'productName'],
-                                                              data.docs[index]
-                                                                  ['price'],
-                                                              data.docs[index]
-                                                                  ['material'],
-                                                              data.docs[index]
-                                                                  ['category'],
-                                                              data.docs[index][
-                                                                  'distributor'],
-                                                              data.docs[index][
-                                                                  "otherAtr/${index.toString()}/atrName"],
-                                                              data.docs[index][
-                                                                  "otherAtr/${index.toString()}/atrDetail"],
-                                                              index.toString(),
-                                                              data.docs[index]
-                                                                  ['wroteBy'],
-                                                              data.docs[index][
-                                                                  'writtenDate']);
-                                                        }
-                                                        copy(
-                                                            data.docs[index]
-                                                                ['id'],
-                                                            data.docs[index]
-                                                                ['pid'],
-                                                            data.docs[index]
-                                                                ['productName'],
-                                                            data.docs[index]
-                                                                ['price'],
-                                                            data.docs[index]
-                                                                ['material'],
-                                                            data.docs[index]
-                                                                ['category'],
-                                                            data.docs[index]
-                                                                ['distributor'],
-                                                            data.docs[index]
-                                                                ['wroteBy'],
-                                                            data.docs[index][
-                                                                'writtenDate']);
+                                                        addRecord(
+                                                                data.docs[index]
+                                                                    ['id'])
+                                                            .addProductFromTrack();
                                                       },
                                                       icon: const Icon(
                                                         Icons.check_outlined,
@@ -230,10 +187,6 @@ class _approvePageState extends State<approvePage> {
                                                               20)),
                                                   child: TextButton.icon(
                                                       onPressed: () {
-                                                        // deleteRecord(data
-                                                        //             .docs[
-                                                        //         index]['id'])
-                                                        //     .deleteTrack();
                                                         removeTrack(
                                                                 data.docs[index]
                                                                     ['id'])

@@ -81,7 +81,7 @@ class _deleteAlertState extends State<deleteAlert> {
                                 content: Text('Succesfully remove product')));
                       } else {
                         // await addTrack(pid, uid, date, false);
-                        await removeTrack(id).Pending(pid, date, uid, true);
+                        await removeTrack(id).Pending(pid, date, uid, false);
                         ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                                 content: Text('Your request is now pending')));

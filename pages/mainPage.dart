@@ -33,7 +33,6 @@ class _mainPageState extends State<mainPage> {
           if (snapshot.hasError) {
             ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
               content: Text('Something Went Wrong, Please Try Again'),
-              duration: Duration(seconds: 3),
             ));
             Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (context) => const loginPage()));

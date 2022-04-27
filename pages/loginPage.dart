@@ -24,7 +24,7 @@ class _loginPageState extends State<loginPage> {
 
   // string for displaying the error Message
   String? errorMessage;
-  bool visible = false;
+  bool visible = true;
 
   @override
   Widget build(BuildContext context) {
