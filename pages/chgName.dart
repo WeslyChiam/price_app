@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:price_app/const/color.dart';
 
-
 class chgName extends StatelessWidget {
   const chgName({Key? key}) : super(key: key);
 
@@ -103,8 +102,6 @@ class chgName extends StatelessWidget {
                         style: TextStyle(color: white),
                       )),
                 ),
-
-
               ],
             ));
           }

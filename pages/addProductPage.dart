@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:price_app/const/color.dart';
 import 'package:price_app/const/addProductForm.dart';
 
-
 class addProductPage extends StatelessWidget {
   final uid = FirebaseAuth.instance.currentUser!.uid;
 

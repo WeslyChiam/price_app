@@ -2,10 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:price_app/const/bottomTable.dart';
-import 'package:price_app/const/checkOtherTable.dart';
 import 'package:price_app/const/color.dart';
 import 'package:price_app/const/deleteTrack.dart';
+import 'package:price_app/const/getUser.dart';
+import 'package:price_app/model/otherTableModel.dart';
+// import 'package:price_app/pages/deleteAlert.dart';
 import 'package:price_app/pages/updatePage.dart';
 import 'package:draggable_scrollbar/draggable_scrollbar.dart';
 
@@ -21,8 +22,9 @@ class _recentTableState extends State<recentTable> {
 
   @override
   Widget build(BuildContext context) {
-    final Stream<QuerySnapshot> _productStream =
-        FirebaseFirestore.instance.collection('products').snapshots();
+    final Stream<QuerySnapshot> _productStream = FirebaseFirestore.instance
+        .collection('products')
+        .snapshots(includeMetadataChanges: true);
     return StreamBuilder<QuerySnapshot>(
       stream: _productStream,
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -33,6 +35,12 @@ class _recentTableState extends State<recentTable> {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Text('Loading...',
               style: TextStyle(color: lightBlack, fontSize: 25.0));
+        }
+        if (snapshot.data == null || snapshot.hasData) {
+          return const Center(
+            child: Text(
+                "No data has found. Try add a new one by pressing '+' button"),
+          );
         }
         final data = snapshot.requireData;
         const String airSVG = 'assets/svg/air.svg';
@@ -91,18 +99,37 @@ class _recentTableState extends State<recentTable> {
                                     MainAxisAlignment.spaceEvenly,
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  bottomMainTable(
-                                      data.docs[index]['productName'],
-                                      data.docs[index]['price'],
-                                      data.docs[index]['distributor'],
-                                      data.docs[index]['material'],
-                                      data.docs[index]['category'],
-                                      true,
-                                      data.docs[index]['wroteBy'],
-                                      data.docs[index]['writtenDate']),
-                                  // const Text('Other:'),
-                                  // checkOtherTable(data.docs[index]['id']),
-                                  // otherTableModel(data.docs[index]['pid']),
+                                  Table(
+                                    children: [
+                                      TableRow(children: [
+                                        const Text('Product Name:'),
+                                        Text(data.docs[index]['productName']),
+                                      ]),
+                                      TableRow(children: [
+                                        const Text('Price:'),
+                                        Text('RM ${data.docs[index]['price']}'),
+                                      ]),
+                                      TableRow(children: [
+                                        const Text('Distributor:'),
+                                        Text(data.docs[index]['distributor']),
+                                      ]),
+                                      TableRow(children: [
+                                        const Text('Material:'),
+                                        Text(data.docs[index]['material']),
+                                      ]),
+                                      TableRow(children: [
+                                        const Text('Category:'),
+                                        Text(data.docs[index]['category']),
+                                      ]),
+                                      TableRow(children: [
+                                        const Text('Last Wrote By:'),
+                                        getUser("", data.docs[index]['wroteBy'],
+                                            data.docs[index]['writtenDate']),
+                                      ]),
+                                    ],
+                                  ),
+                                  const Text('Other:'),
+                                  otherTableModel(data.docs[index]['pid']),
                                   Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceEvenly,

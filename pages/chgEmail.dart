@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:price_app/const/color.dart';
 
-
 class chgEmail extends StatelessWidget {
   const chgEmail({Key? key}) : super(key: key);
 
@@ -100,7 +99,6 @@ class chgEmail extends StatelessWidget {
                         style: TextStyle(color: white),
                       )),
                 ),
-
               ],
             ));
           }

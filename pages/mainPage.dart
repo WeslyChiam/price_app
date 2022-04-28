@@ -32,7 +32,7 @@ class _mainPageState extends State<mainPage> {
             (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
           if (snapshot.hasError) {
             ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-              content: Text('Something Went Wrong, Please Try Again')
+              content: Text('Something Went Wrong, Please Try Again'),
             ));
             Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (context) => const loginPage()));
@@ -42,6 +42,8 @@ class _mainPageState extends State<mainPage> {
                 snapshot.data!.data() as Map<String, dynamic>;
             ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(content: Text('Welcome, ${data['firstName']}')));
+            String photoURL =
+                FirebaseAuth.instance.currentUser!.photoURL.toString();
             return StreamBuilder<QuerySnapshot>(
               stream: _userStream,
               builder: (BuildContext context,

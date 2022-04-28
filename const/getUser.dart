@@ -7,7 +7,6 @@ class getUser extends StatelessWidget {
   final String date;
   getUser(this.constantText, this.uid, this.date);
 
-
   @override
   Widget build(BuildContext context) {
     CollectionReference users = FirebaseFirestore.instance.collection('users');
@@ -26,7 +25,6 @@ class getUser extends StatelessWidget {
               snapshot.data!.data() as Map<String, dynamic>;
           return Text(
               "$constantText ${data['firstName']} ${data['secondName']} ($date)");
-
         }
         return const Text('Loading');
       },

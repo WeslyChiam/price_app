@@ -11,4 +11,3 @@ const grey = Colors.grey;
 const green = Colors.green;
 const red = Colors.redAccent;
 const clear = Colors.transparent;
-

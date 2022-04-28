@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:price_app/const/color.dart';
 
-
 class chgPassword extends StatelessWidget {
   const chgPassword({Key? key}) : super(key: key);
 
@@ -108,7 +107,6 @@ class chgPassword extends StatelessWidget {
                           style: TextStyle(color: white),
                         )),
                   ),
-
                 ],
               ),
             );
