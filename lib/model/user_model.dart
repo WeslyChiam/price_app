@@ -3,7 +3,7 @@ class UserModel {
   String? email;
   String? firstName;
   String? secondName;
-  String? authority;
+  bool? authority;
   String? displayName;
 
   UserModel(

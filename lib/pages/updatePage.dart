@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:price_app/const/color.dart';
-import 'package:price_app/const/textForm.dart';
+import 'package:price_app/const/updateProductForm.dart';
 
 class updatePage extends StatelessWidget {
   final String pid;
@@ -47,7 +47,7 @@ class updatePage extends StatelessWidget {
                 color: white,
                 child: Padding(
                   padding: const EdgeInsets.all(36),
-                  child: updateTextFormFieldInput(pid, uid),
+                  child: updateTextFormFieldInput(pid),
                 ),
               ),
             ),

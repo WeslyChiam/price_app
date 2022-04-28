@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:price_app/const/color.dart';
+
 
 class chgEmail extends StatelessWidget {
   const chgEmail({Key? key}) : super(key: key);
@@ -82,10 +84,23 @@ class chgEmail extends StatelessWidget {
                     ),
                   ],
                 ),
-                TextButton.icon(
-                    onPressed: updateEmail,
-                    icon: const Icon(Icons.save),
-                    label: const Text('Save Changes')),
+                Container(
+                  height: 50,
+                  width: 250,
+                  decoration: BoxDecoration(
+                      color: blue, borderRadius: BorderRadius.circular(20)),
+                  child: TextButton.icon(
+                      onPressed: updateEmail,
+                      icon: const Icon(
+                        Icons.save,
+                        color: white,
+                      ),
+                      label: const Text(
+                        'Save Changes',
+                        style: TextStyle(color: white),
+                      )),
+                ),
+
               ],
             ));
           }

@@ -4,6 +4,7 @@ import 'package:price_app/pages/authPage.dart';
 import 'package:price_app/pages/helpPage.dart';
 import 'package:price_app/pages/loginPage.dart';
 import 'package:price_app/pages/settingPage.dart';
+import 'package:price_app/pages/recordPage.dart';
 import 'package:price_app/pages/updatePage.dart';
 import 'package:price_app/pages/historyPage.dart';
 
@@ -28,7 +29,7 @@ class drawerList extends StatelessWidget {
                               ? Icons.logout
                               : Icons.abc),
       title: name == 'history'
-          ? const Text('View Data')
+          ? const Text('View Record')
           : name == 'update'
               ? const Text('Update Product')
               : name == 'setting'

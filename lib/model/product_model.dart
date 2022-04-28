@@ -1,29 +1,32 @@
 class ProductModel {
   String? pid;
-  String? name;
-  int? price;
-  String? company;
-  String? category;
+  String? productName;
+  String? price;
+  String? distributor;
   String? material;
+  String? category;
+  String? wroteBy;
   String? date;
 
   ProductModel(
       {this.pid,
-      this.name,
+      this.productName,
       this.price,
-      this.category,
+      this.distributor,
       this.material,
-      this.company,
+      this.category,
+      this.wroteBy,
       this.date});
 
   factory ProductModel.fromMap(map) {
     return ProductModel(
       pid: map['pid'],
-      name: map['productName'],
+      productName: map['productName'],
       price: map['price'],
-      category: map['category'],
+      distributor: map['distributor'],
       material: map['material'],
-      company: map['company'],
+      category: map['category'],
+      wroteBy: map['wroteBy'],
       date: map['date'],
     );
   }
@@ -31,12 +34,72 @@ class ProductModel {
   Map<String, dynamic> toMap() {
     return {
       'pid': pid,
-      'productName': name,
+      'productName': productName,
       'price': price,
-      'category': category,
+      'distributor': distributor,
       'material': material,
-      'company': company,
-      'date': date,
+      'category': category,
+      'wroteBy': wroteBy,
+      'writtenDate': date,
+    };
+  }
+}
+
+class ProductModelWthOther {
+  String? pid;
+  String? productName;
+  String? price;
+  String? distributor;
+  String? material;
+  String? category;
+  String? atrName;
+  String? atrDetail;
+  String? wroteBy;
+  String? date;
+
+  ProductModelWthOther(
+      {this.pid,
+      this.productName,
+      this.price,
+      this.distributor,
+      this.material,
+      this.category,
+      this.atrName,
+      this.atrDetail,
+      this.wroteBy,
+      this.date});
+
+  factory ProductModelWthOther.fromMap(map) {
+    return ProductModelWthOther(
+      pid: map['pid'],
+      productName: map['productName'],
+      price: map['price'],
+      distributor: map['distributor'],
+      material: map['material'],
+      category: map['category'],
+      atrName: map['atrName'],
+      atrDetail: map['atrDetail'],
+      wroteBy: map['wroteBy'],
+      date: map['date'],
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'pid': pid,
+      'productName': productName,
+      'price': price,
+      'distributor': distributor,
+      'material': material,
+      'category': category,
+      'otherAtr': {
+        '0': {
+          'atrName': atrName,
+          'atrDetail': atrDetail,
+        },
+      },
+      'wroteBy': wroteBy,
+      'writtenDate': date,
     };
   }
 }

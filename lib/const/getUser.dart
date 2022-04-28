@@ -2,8 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class getUser extends StatelessWidget {
+  final String constantText;
   final String uid;
-  getUser(this.uid);
+  final String date;
+  getUser(this.constantText, this.uid, this.date);
+
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +24,9 @@ class getUser extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.done) {
           Map<String, dynamic> data =
               snapshot.data!.data() as Map<String, dynamic>;
-          return Text("${data['firstName']} ${data['secondName']}");
+          return Text(
+              "$constantText ${data['firstName']} ${data['secondName']} ($date)");
+
         }
         return const Text('Loading');
       },

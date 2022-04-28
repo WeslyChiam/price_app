@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:price_app/const/color.dart';
+
 
 class chgName extends StatelessWidget {
   const chgName({Key? key}) : super(key: key);
@@ -85,10 +87,24 @@ class chgName extends StatelessWidget {
               children: [
                 nameRow('first'),
                 nameRow('second'),
-                TextButton.icon(
-                    onPressed: updateName,
-                    icon: const Icon(Icons.save),
-                    label: const Text('Save Changes')),
+                Container(
+                  height: 50,
+                  width: 250,
+                  decoration: BoxDecoration(
+                      color: blue, borderRadius: BorderRadius.circular(20)),
+                  child: TextButton.icon(
+                      onPressed: updateName,
+                      icon: const Icon(
+                        Icons.save,
+                        color: white,
+                      ),
+                      label: const Text(
+                        'Save Changes',
+                        style: TextStyle(color: white),
+                      )),
+                ),
+
+
               ],
             ));
           }

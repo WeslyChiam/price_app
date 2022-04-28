@@ -1131,6 +1131,18 @@ library {
 }
 library {
   maven_library {
+    groupId: "androidx.multidex"
+    artifactId: "multidex"
+    version: "2.0.0"
+  }
+  digests {
+    sha256: "\300\027\000\t\020r\340\377]\216\302\320\016\254k\217\226\352\030d`\200B^\234\343\306\247\265\366n3"
+  }
+  repo_index {
+  }
+}
+library {
+  maven_library {
     groupId: "io.flutter"
     artifactId: "armeabi_v7a_release"
     version: "1.0.0-57d3bac3dd5cb5b0e464ab70e7bc8a0d8cf083ab"
@@ -1170,7 +1182,7 @@ library {
 }
 library {
   digests {
-    sha256: "\261a\'C\210\355\370k\252\215!\223\234\256\030\342\a\001\a:T\274\031P\265-\271\'\3662\300L"
+    sha256: "\263<\t\222\277r\242\326,\242\256J0\260|f\243E\\m`\336\337\323\270Gw\031\327\2653\000"
   }
 }
 library_dependencies {
@@ -1660,10 +1672,11 @@ module_dependencies {
   dependency_index: 92
   dependency_index: 93
   dependency_index: 94
+  dependency_index: 95
   dependency_index: 33
   dependency_index: 4
   dependency_index: 79
-  dependency_index: 95
+  dependency_index: 96
 }
 repositories {
   maven_repo {

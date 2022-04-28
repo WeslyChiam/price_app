@@ -32,8 +32,7 @@ class _mainPageState extends State<mainPage> {
             (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
           if (snapshot.hasError) {
             ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-              content: Text('Something Went Wrong, Please Try Again'),
-              duration: Duration(seconds: 3),
+              content: Text('Something Went Wrong, Please Try Again')
             ));
             Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (context) => const loginPage()));
@@ -110,14 +109,15 @@ class _mainPageState extends State<mainPage> {
                               color: lightBlack,
                               shape: BoxShape.circle,
                             ),
-                            child: Center(
-                              child: Column(
-                                children: const [
-                                  Icon(
-                                    Icons.account_circle,
-                                    size: 120.0,
-                                  )
-                                ],
+                            child: const Align(
+                              alignment: Alignment.center,
+                              child: Padding(
+                                padding: EdgeInsets.all(8),
+                                child: CircleAvatar(
+                                  radius: 50,
+                                  backgroundImage: NetworkImage(
+                                      "https://picsum.photos/300/300"),
+                                ),
                               ),
                             ),
                           ),

@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:price_app/const/color.dart';
+
 
 class chgPassword extends StatelessWidget {
   const chgPassword({Key? key}) : super(key: key);
@@ -90,10 +92,23 @@ class chgPassword extends StatelessWidget {
                 children: [
                   passwordRow('password'),
                   passwordRow(''),
-                  TextButton.icon(
-                      onPressed: updatePassword,
-                      icon: Icon(Icons.save),
-                      label: const Text('Save Changes'))
+                  Container(
+                    height: 50,
+                    width: 250,
+                    decoration: BoxDecoration(
+                        color: blue, borderRadius: BorderRadius.circular(20)),
+                    child: TextButton.icon(
+                        onPressed: updatePassword,
+                        icon: const Icon(
+                          Icons.save,
+                          color: white,
+                        ),
+                        label: const Text(
+                          'Save Changes',
+                          style: TextStyle(color: white),
+                        )),
+                  ),
+
                 ],
               ),
             );

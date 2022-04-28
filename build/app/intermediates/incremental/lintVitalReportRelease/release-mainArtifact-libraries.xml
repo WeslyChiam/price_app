@@ -128,6 +128,19 @@
       externalAnnotations="annotations.zip"
       proguardRules="proguard.txt"/>
   <library
+      name="androidx.multidex:multidex:2.0.0@aar"
+      jars="/home/weslychiam/.gradle/caches/transforms-3/170075c685d3fac02784fe77046089cd/transformed/multidex-2.0.0/jars/classes.jar"
+      resolved="androidx.multidex:multidex:2.0.0"
+      folder="/home/weslychiam/.gradle/caches/transforms-3/170075c685d3fac02784fe77046089cd/transformed/multidex-2.0.0"
+      manifest="AndroidManifest.xml"
+      resFolder="res"
+      assetsFolder="assets"
+      lintJar="lint.jar"
+      publicResources="public.txt"
+      symbolFile="R.txt"
+      externalAnnotations="annotations.zip"
+      proguardRules="proguard.txt"/>
+  <library
       name="io.flutter:armeabi_v7a_release:1.0.0-57d3bac3dd5cb5b0e464ab70e7bc8a0d8cf083ab@jar"
       jars="/home/weslychiam/.gradle/caches/modules-2/files-2.1/io.flutter/armeabi_v7a_release/1.0.0-57d3bac3dd5cb5b0e464ab70e7bc8a0d8cf083ab/b47091ef34acbcdb4798146eed5c93e77478225/armeabi_v7a_release-1.0.0-57d3bac3dd5cb5b0e464ab70e7bc8a0d8cf083ab.jar"
       resolved="io.flutter:armeabi_v7a_release:1.0.0-57d3bac3dd5cb5b0e464ab70e7bc8a0d8cf083ab"/>

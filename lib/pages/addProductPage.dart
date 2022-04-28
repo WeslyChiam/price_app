@@ -2,7 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:price_app/const/color.dart';
-import 'package:price_app/const/textForm.dart';
+import 'package:price_app/const/addProductForm.dart';
+
 
 class addProductPage extends StatelessWidget {
   final uid = FirebaseAuth.instance.currentUser!.uid;

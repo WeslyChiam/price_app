@@ -17,12 +17,10 @@ class regPaper extends StatefulWidget {
 class _regPaperState extends State<regPaper> {
   final _auth = FirebaseAuth.instance;
 
-  // string for displaying the error Message
   String? errorMessage;
 
-  // our form key
   final _formKey = GlobalKey<FormState>();
-  // editing Controller
+
   final firstNameEditingController = TextEditingController();
   final secondNameEditingController = TextEditingController();
   final emailEditingController = TextEditingController();
@@ -40,7 +38,7 @@ class _regPaperState extends State<regPaper> {
 
   @override
   Widget build(BuildContext context) {
-    //first name field
+    const String logo = 'assets/logo/logo.png';
     final firstNameField = TextFormField(
         autofocus: false,
         controller: firstNameEditingController,
@@ -68,7 +66,6 @@ class _regPaperState extends State<regPaper> {
           ),
         ));
 
-    //second name field
     final secondNameField = TextFormField(
         autofocus: false,
         controller: secondNameEditingController,
@@ -92,7 +89,6 @@ class _regPaperState extends State<regPaper> {
           ),
         ));
 
-    //email field
     final emailField = TextFormField(
         autofocus: false,
         controller: emailEditingController,
@@ -101,7 +97,7 @@ class _regPaperState extends State<regPaper> {
           if (value!.isEmpty) {
             return ("Please Enter Your Email");
           }
-          // reg expression for email validation
+
           if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
               .hasMatch(value)) {
             return ("Please Enter a valid email");
@@ -121,7 +117,6 @@ class _regPaperState extends State<regPaper> {
           ),
         ));
 
-    //password field
     final passwordField = TextFormField(
         autofocus: false,
         controller: passwordEditingController,
@@ -148,7 +143,6 @@ class _regPaperState extends State<regPaper> {
           ),
         ));
 
-    //confirm password field
     final confirmPasswordField = TextFormField(
         autofocus: false,
         controller: confirmPasswordEditingController,
@@ -180,6 +174,7 @@ class _regPaperState extends State<regPaper> {
           context, MaterialPageRoute(builder: (context) => const tncPage())),
     );
 
+
     //signup button
     final signUpButton = Material(
         elevation: 5,
@@ -192,12 +187,6 @@ class _regPaperState extends State<regPaper> {
             signUp(emailEditingController.text, passwordEditingController.text);
           },
           child: defaultText('SignUp', 20.0, false, true, false),
-          // const Text(
-          //   "SignUp",
-          //   textAlign: TextAlign.center,
-          //   style: TextStyle(
-          //       fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
-          // )),
         ));
 
     return Scaffold(
@@ -215,13 +204,12 @@ class _regPaperState extends State<regPaper> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    const SizedBox(
+                    SizedBox(
                       height: 200,
-                      child: Text('Place Logo Here'),
-                      // child: Image.asset(
-                      //   "assets/logo.png",
-                      //   fit: BoxFit.contain,
-                      // ),
+                      child: Image.asset(
+                        logo,
+                        fit: BoxFit.contain,
+                      ),
                     ),
                     const SizedBox(height: 45),
                     firstNameField,
@@ -236,25 +224,6 @@ class _regPaperState extends State<regPaper> {
                     const SizedBox(height: 20),
                     tncLink,
                     const SizedBox(height: 20),
-
-                    // Container(
-                    //   margin: const EdgeInsets.symmetric(vertical: 16.0),
-                    //   child: Column(
-                    //     children: [
-                    //       const Text(
-                    //           ,
-                    //           style: TextStyle(color: lightBlack)),
-                    //       GestureDetector(
-                    //         onTap: () {
-                    //           Navigator.push(
-                    //               context,
-                    //               MaterialPageRoute(
-                    //                   builder: (context) => const tncPage()));
-                    //         },
-                    //       )
-                    //     ],
-                    //   ),
-                    // ),
                     signUpButton,
                     const SizedBox(height: 15),
                   ],
@@ -312,20 +281,20 @@ class _regPaperState extends State<regPaper> {
 
     UserModel userModel = UserModel();
 
-    // writing all the values
     userModel.email = user!.email;
     userModel.uid = user.uid;
     userModel.firstName = firstNameEditingController.text;
     userModel.secondName = secondNameEditingController.text;
     userModel.displayName = '${user.displayName}';
-    userModel.authority = 'Level-1';
+    userModel.authority = false;
+
 
     await firebaseFirestore
         .collection("users")
         .doc(user.uid)
         .set(userModel.toMap());
-    // ScaffoldMessenger.of(context).showSnackBar(
-    //     const SnackBar(content: Text("Account created successfully :) ")));
+     ScaffoldMessenger.of(context).showSnackBar(
+         const SnackBar(content: Text("Account created successfully :) ")));
 
     Navigator.pushAndRemoveUntil(
         (context),
