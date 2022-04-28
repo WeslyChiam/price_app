@@ -2328,6 +2328,22 @@ androidx.localbroadcastmanager.content.LocalBroadcastManager:
     static final int MSG_EXEC_PENDING_BROADCASTS
     private static final java.lang.String TAG
     public void sendBroadcastSync(android.content.Intent)
+androidx.multidex.BuildConfig
+androidx.multidex.MultiDex$V14$ElementConstructor
+androidx.multidex.MultiDex$V14$ICSElementConstructor
+androidx.multidex.MultiDex$V14$JBMR11ElementConstructor
+androidx.multidex.MultiDex$V14$JBMR2ElementConstructor
+androidx.multidex.MultiDex$V14
+androidx.multidex.MultiDex$V19
+androidx.multidex.MultiDex$V4
+androidx.multidex.MultiDex
+androidx.multidex.MultiDexApplication
+androidx.multidex.MultiDexExtractor$1
+androidx.multidex.MultiDexExtractor$ExtractedDex
+androidx.multidex.MultiDexExtractor
+androidx.multidex.R
+androidx.multidex.ZipUtil$CentralDirectory
+androidx.multidex.ZipUtil
 androidx.print.PrintHelper$1
 androidx.print.PrintHelper$OnPrintFinishCallback
 androidx.print.PrintHelper$PrintBitmapAdapter

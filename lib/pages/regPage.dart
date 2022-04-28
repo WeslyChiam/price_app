@@ -5,6 +5,7 @@ import 'package:price_app/model/user_model.dart';
 import 'package:price_app/pages/mainPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:price_app/pages/tncPage.dart';
 
 class regPaper extends StatefulWidget {
   const regPaper({Key? key}) : super(key: key);
@@ -16,21 +17,28 @@ class regPaper extends StatefulWidget {
 class _regPaperState extends State<regPaper> {
   final _auth = FirebaseAuth.instance;
 
-  // string for displaying the error Message
   String? errorMessage;
 
-  // our form key
   final _formKey = GlobalKey<FormState>();
-  // editing Controller
+
   final firstNameEditingController = TextEditingController();
   final secondNameEditingController = TextEditingController();
   final emailEditingController = TextEditingController();
   final passwordEditingController = TextEditingController();
   final confirmPasswordEditingController = TextEditingController();
 
+  void dispose() {
+    firstNameEditingController.dispose();
+    secondNameEditingController.dispose();
+    emailEditingController.dispose();
+    passwordEditingController.dispose();
+    confirmPasswordEditingController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    //first name field
+    const String logo = 'assets/logo/logo.png';
     final firstNameField = TextFormField(
         autofocus: false,
         controller: firstNameEditingController,
@@ -58,7 +66,6 @@ class _regPaperState extends State<regPaper> {
           ),
         ));
 
-    //second name field
     final secondNameField = TextFormField(
         autofocus: false,
         controller: secondNameEditingController,
@@ -82,7 +89,6 @@ class _regPaperState extends State<regPaper> {
           ),
         ));
 
-    //email field
     final emailField = TextFormField(
         autofocus: false,
         controller: emailEditingController,
@@ -91,7 +97,7 @@ class _regPaperState extends State<regPaper> {
           if (value!.isEmpty) {
             return ("Please Enter Your Email");
           }
-          // reg expression for email validation
+
           if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
               .hasMatch(value)) {
             return ("Please Enter a valid email");
@@ -111,7 +117,6 @@ class _regPaperState extends State<regPaper> {
           ),
         ));
 
-    //password field
     final passwordField = TextFormField(
         autofocus: false,
         controller: passwordEditingController,
@@ -138,7 +143,6 @@ class _regPaperState extends State<regPaper> {
           ),
         ));
 
-    //confirm password field
     final confirmPasswordField = TextFormField(
         autofocus: false,
         controller: confirmPasswordEditingController,
@@ -163,7 +167,13 @@ class _regPaperState extends State<regPaper> {
           ),
         ));
 
-    //signup button
+    final tncLink = GestureDetector(
+      child: const Text(
+          "By Signing Up, you are agreed to Terms and Condition of this application"),
+      onTap: () => Navigator.push(
+          context, MaterialPageRoute(builder: (context) => const tncPage())),
+    );
+
     final signUpButton = Material(
         elevation: 5,
         borderRadius: BorderRadius.circular(30),
@@ -175,12 +185,6 @@ class _regPaperState extends State<regPaper> {
             signUp(emailEditingController.text, passwordEditingController.text);
           },
           child: defaultText('SignUp', 20.0, false, true, false),
-          // const Text(
-          //   "SignUp",
-          //   textAlign: TextAlign.center,
-          //   style: TextStyle(
-          //       fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
-          // )),
         ));
 
     return Scaffold(
@@ -199,11 +203,12 @@ class _regPaperState extends State<regPaper> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     SizedBox(
-                        height: 180,
-                        child: Image.asset(
-                          "assets/logo.png",
-                          fit: BoxFit.contain,
-                        )),
+                      height: 200,
+                      child: Image.asset(
+                        logo,
+                        fit: BoxFit.contain,
+                      ),
+                    ),
                     const SizedBox(height: 45),
                     firstNameField,
                     const SizedBox(height: 20),
@@ -214,6 +219,8 @@ class _regPaperState extends State<regPaper> {
                     passwordField,
                     const SizedBox(height: 20),
                     confirmPasswordField,
+                    const SizedBox(height: 20),
+                    tncLink,
                     const SizedBox(height: 20),
                     signUpButton,
                     const SizedBox(height: 15),
@@ -267,27 +274,22 @@ class _regPaperState extends State<regPaper> {
   }
 
   postDetailsToFirestore() async {
-    // calling our firestore
-    // calling our user model
-    // sedning these values
-
     FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
     User? user = _auth.currentUser;
 
     UserModel userModel = UserModel();
 
-    // writing all the values
     userModel.email = user!.email;
     userModel.uid = user.uid;
     userModel.firstName = firstNameEditingController.text;
     userModel.secondName = secondNameEditingController.text;
+    userModel.displayName = '${user.displayName}';
+    userModel.authority = false;
 
     await firebaseFirestore
         .collection("users")
         .doc(user.uid)
         .set(userModel.toMap());
-    ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Account created successfully :) ")));
 
     Navigator.pushAndRemoveUntil(
         (context),
