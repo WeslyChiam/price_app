@@ -46,7 +46,6 @@ class ProductModel {
       'material': material,
       'type': type,
       'category': category,
-      'list': list,
       'wroteBy': wroteBy,
       'writtenDate': date,
     };

@@ -57,7 +57,6 @@ class TrackModel {
       'type': type,
       'category': category,
       'action': action,
-      'list': list,
       'wroteBy': wroteBy,
       'writtenDate': date,
       'approve': approve,

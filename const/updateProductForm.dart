@@ -170,30 +170,6 @@ class _updateTextFormFieldInputState extends State<updateTextFormFieldInput> {
         });
   }
 
-  // Widget otherAtrFormInput() {
-  //   return CheckboxListTile(
-  //       controlAffinity: ListTileControlAffinity.leading,
-  //       value: updateOther,
-  //       title: inputForm('other', updateOther),
-  //       onChanged: (bool? value) {
-  //         setState(() {
-  //           updateOther = value!;
-  //         });
-  //       });
-  // }
-
-  // Widget otherAtrDetailFormInput() {
-  //   return CheckboxListTile(
-  //       controlAffinity: ListTileControlAffinity.leading,
-  //       value: updateDetail,
-  //       title: inputForm('', updateDetail),
-  //       onChanged: (bool? value) {
-  //         setState(() {
-  //           updateDetail = value!;
-  //         });
-  //       });
-  // }
-
   Future addTrack(String pid, String price, String distributor, String material,
       String date, String str_date, String uid, bool approve) async {
     String id = str_date + 'UPDATE' + pid;
@@ -273,10 +249,6 @@ class _updateTextFormFieldInputState extends State<updateTextFormFieldInput> {
                   const SizedBox(height: 20.0),
                   materialFormInput(),
                   const SizedBox(height: 20.0),
-                  // otherAtrFormInput(),
-                  // const SizedBox(height: 20.0),
-                  // otherAtrDetailFormInput(),
-                  // const SizedBox(height: 20.0),
                   Container(
                     height: 50.0,
                     width: 250.0,
@@ -323,7 +295,7 @@ class _updateTextFormFieldInputState extends State<updateTextFormFieldInput> {
                               date,
                               str_date,
                               uid,
-                              true);
+                              false);
                           ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
                                   content:

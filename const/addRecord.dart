@@ -108,7 +108,7 @@ class addRecord extends StatelessWidget {
   ) async {
     TrackModel trackModel = TrackModel();
     trackModel.id = id;
-    trackModel.pid = id;
+    trackModel.pid = pid;
     trackModel.productName = name;
     trackModel.price = price;
     trackModel.distributor = distributor;
