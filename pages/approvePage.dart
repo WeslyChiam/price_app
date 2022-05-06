@@ -128,6 +128,13 @@ class _approvePageState extends State<approvePage> {
                                                       addRecord(data.docs[index]
                                                               ['id'])
                                                           .addProductFromTrack();
+                                                      FirebaseFirestore.instance
+                                                          .collection("tracks")
+                                                          .doc(data.docs[index]
+                                                              ['id'])
+                                                          .update({
+                                                        'approve': true,
+                                                      });
 
                                                       Navigator.pop(context);
                                                     },
