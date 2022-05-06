@@ -170,36 +170,33 @@ class _updateTextFormFieldInputState extends State<updateTextFormFieldInput> {
         });
   }
 
-  Widget otherAtrFormInput() {
-    return CheckboxListTile(
-        controlAffinity: ListTileControlAffinity.leading,
-        value: updateOther,
-        title: inputForm('other', updateOther),
-        onChanged: (bool? value) {
-          setState(() {
-            updateOther = value!;
-          });
-        });
-  }
+  // Widget otherAtrFormInput() {
+  //   return CheckboxListTile(
+  //       controlAffinity: ListTileControlAffinity.leading,
+  //       value: updateOther,
+  //       title: inputForm('other', updateOther),
+  //       onChanged: (bool? value) {
+  //         setState(() {
+  //           updateOther = value!;
+  //         });
+  //       });
+  // }
 
-  Widget otherAtrDetailFormInput() {
-    return CheckboxListTile(
-        controlAffinity: ListTileControlAffinity.leading,
-        value: updateDetail,
-        title: inputForm('', updateDetail),
-        onChanged: (bool? value) {
-          setState(() {
-            updateDetail = value!;
-            // if (updateDetail = false) {
-            //   otherDetailTextController.clear();
-            // }
-          });
-        });
-  }
+  // Widget otherAtrDetailFormInput() {
+  //   return CheckboxListTile(
+  //       controlAffinity: ListTileControlAffinity.leading,
+  //       value: updateDetail,
+  //       title: inputForm('', updateDetail),
+  //       onChanged: (bool? value) {
+  //         setState(() {
+  //           updateDetail = value!;
+  //         });
+  //       });
+  // }
 
   Future addTrack(String pid, String price, String distributor, String material,
-      String date, String uid, bool approve) async {
-    String id = 'UPDATE' + pid + date;
+      String date, String str_date, String uid, bool approve) async {
+    String id = str_date + 'UPDATE' + pid;
     DocumentReference track =
         FirebaseFirestore.instance.collection('tracks').doc(id);
     FirebaseFirestore.instance.runTransaction((transaction) async {
@@ -276,10 +273,10 @@ class _updateTextFormFieldInputState extends State<updateTextFormFieldInput> {
                   const SizedBox(height: 20.0),
                   materialFormInput(),
                   const SizedBox(height: 20.0),
-                  otherAtrFormInput(),
-                  const SizedBox(height: 20.0),
-                  otherAtrDetailFormInput(),
-                  const SizedBox(height: 20.0),
+                  // otherAtrFormInput(),
+                  // const SizedBox(height: 20.0),
+                  // otherAtrDetailFormInput(),
+                  // const SizedBox(height: 20.0),
                   Container(
                     height: 50.0,
                     width: 250.0,
@@ -296,6 +293,10 @@ class _updateTextFormFieldInputState extends State<updateTextFormFieldInput> {
                             now.month.toString() +
                             '/' +
                             now.year.toString();
+                        String str_date = now.day.toString() +
+                            now.month.toString() +
+                            now.year.toString();
+
                         if (data['authority'] == true) {
                           await addTrack(
                               pid,
@@ -303,6 +304,7 @@ class _updateTextFormFieldInputState extends State<updateTextFormFieldInput> {
                               distributorTextController.text,
                               materialTextController.text,
                               date,
+                              str_date,
                               uid,
                               true);
                           await updateProduct(
@@ -319,6 +321,7 @@ class _updateTextFormFieldInputState extends State<updateTextFormFieldInput> {
                               distributorTextController.text,
                               materialTextController.text,
                               date,
+                              str_date,
                               uid,
                               true);
                           ScaffoldMessenger.of(context).showSnackBar(

@@ -19,6 +19,7 @@ class _textFormFieldInputState extends State<textFormFieldInput> {
   final priceNumController = TextEditingController();
   final companyTextController = TextEditingController();
   final materialTextController = TextEditingController();
+  final typeTextController = TextEditingController();
   final otherTextController = TextEditingController();
   final otherDetailTextController = TextEditingController();
   String productDDValue = 'AIR';
@@ -72,76 +73,6 @@ class _textFormFieldInputState extends State<textFormFieldInput> {
     );
   }
 
-  Widget addOtherBtn() {
-    return TextButton.icon(
-        onPressed: () {
-          setState(() {
-            otherCategory != otherCategory;
-          });
-        },
-        icon: const Icon(Icons.add),
-        label: const Text('Add other attribute'));
-  }
-
-  Widget otherTextFormInput() {
-    return CheckboxListTile(
-        controlAffinity: ListTileControlAffinity.leading,
-        value: otherCategory,
-        title: TextFormField(
-          autofocus: false,
-          enabled: otherCategory,
-          controller: otherTextController,
-          keyboardType: TextInputType.name,
-          validator: otherCategory == true
-              ? (value) {
-                  if (value!.isEmpty) {
-                    return ('Cannot be empty');
-                  } else if (!regex.hasMatch(value)) {
-                    return ('Must be between 3 to 50 letters');
-                  }
-                }
-              : null,
-          onSaved: (value) => otherTextController.text = value!,
-          textInputAction: TextInputAction.next,
-          decoration: InputDecoration(
-              prefixIcon: const Icon(Icons.add_box),
-              contentPadding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-              hintText: 'Other Attribute Name',
-              border:
-                  OutlineInputBorder(borderRadius: BorderRadius.circular(10))),
-        ),
-        onChanged: (bool? value) {
-          setState(() {
-            otherCategory = value!;
-          });
-        });
-  }
-
-  Widget otherDetailTextFormInput(bool otherCategory) {
-    return TextFormField(
-      autofocus: false,
-      enabled: otherCategory,
-      controller: otherDetailTextController,
-      keyboardType: TextInputType.name,
-      validator: otherCategory == true
-          ? (value) {
-              if (value!.isEmpty) {
-                return ('Cannot be empty');
-              } else if (!regex.hasMatch(value)) {
-                return ('Must be between 3 to 50 letters');
-              }
-            }
-          : null,
-      onSaved: (value) => otherDetailTextController.text = value!,
-      textInputAction: TextInputAction.done,
-      decoration: InputDecoration(
-          prefixIcon: const Icon(Icons.add_card),
-          contentPadding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-          hintText: 'Details',
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(10))),
-    );
-  }
-
   Widget textFormTypeInput(dataType, enable) {
     return TextFormField(
       autofocus: false,
@@ -154,9 +85,11 @@ class _textFormFieldInputState extends State<textFormFieldInput> {
                   ? companyTextController
                   : dataType == 'material'
                       ? materialTextController
-                      : dataType == 'other'
-                          ? otherTextController
-                          : otherDetailTextController,
+                      : dataType == 'type'
+                          ? typeTextController
+                          : dataType == 'other'
+                              ? otherTextController
+                              : otherDetailTextController,
       keyboardType:
           dataType == 'price' ? TextInputType.number : TextInputType.name,
       validator: enable == true
@@ -193,13 +126,17 @@ class _textFormFieldInputState extends State<textFormFieldInput> {
                       ? (value) {
                           materialTextController.text = value!;
                         }
-                      : dataType == 'other'
+                      : dataType == 'type'
                           ? (value) {
-                              otherTextController.text = value!;
+                              typeTextController.text = value!;
                             }
-                          : (value) {
-                              otherDetailTextController.text = value!;
-                            },
+                          : dataType == 'other'
+                              ? (value) {
+                                  otherTextController.text = value!;
+                                }
+                              : (value) {
+                                  otherDetailTextController.text = value!;
+                                },
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
         prefixIcon: Icon(dataType == 'name'
@@ -208,11 +145,13 @@ class _textFormFieldInputState extends State<textFormFieldInput> {
                 ? Icons.price_change
                 : dataType == 'company'
                     ? Icons.add_business
-                    : dataType == 'material'
-                        ? Icons.hive
-                        : dataType == 'other'
-                            ? Icons.add_box
-                            : Icons.add_card),
+                    : dataType == 'type'
+                        ? Icons.tab
+                        : dataType == 'material'
+                            ? Icons.hive
+                            : dataType == 'other'
+                                ? Icons.add_box
+                                : Icons.add_card),
         contentPadding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         hintText: dataType == 'name'
             ? 'Product Name'
@@ -222,9 +161,11 @@ class _textFormFieldInputState extends State<textFormFieldInput> {
                     ? 'Distributor'
                     : dataType == 'material'
                         ? 'Material Name'
-                        : dataType == 'other'
-                            ? 'Other Attribute Name'
-                            : 'Details',
+                        : dataType == 'type'
+                            ? 'type'
+                            : dataType == 'other'
+                                ? 'Other Attribute Name'
+                                : 'Details',
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),
@@ -247,7 +188,6 @@ class _textFormFieldInputState extends State<textFormFieldInput> {
           if (snapshot.connectionState == ConnectionState.done) {
             Map<String, dynamic> data =
                 snapshot.data!.data() as Map<String, dynamic>;
-            bool auth = data['authority'];
             return Form(
                 key: formKey,
                 child: Column(
@@ -263,11 +203,9 @@ class _textFormFieldInputState extends State<textFormFieldInput> {
                     const SizedBox(height: 20.0),
                     textFormTypeInput('material', true),
                     const SizedBox(height: 20.0),
+                    textFormTypeInput('type', true),
+                    const SizedBox(height: 20.0),
                     categoryDD(),
-                    const SizedBox(height: 20.0),
-                    otherTextFormInput(),
-                    const SizedBox(height: 20.0),
-                    otherDetailTextFormInput(otherCategory),
                     const SizedBox(height: 20.0),
                     Container(
                       height: 50.0,
@@ -290,11 +228,18 @@ class _textFormFieldInputState extends State<textFormFieldInput> {
                             String pid =
                                 productDDValue + nameTextController.text;
                             String id =
-                                'ADD' + nameTextController.text + str_date;
+                                str_date + 'ADD' + nameTextController.text;
                             if (formKey.currentState!.validate()) {
                               final auth = FirebaseFirestore.instance
                                   .collection('users')
                                   .doc(uid);
+                              List<String> splitList =
+                                  nameTextController.text.split(" ");
+                              List<String> indexList = [];
+                              for (int i = 0; i < splitList.length; i++) {
+                                indexList.add(
+                                    splitList[i].substring(0, i).toLowerCase());
+                              }
 
                               if (data['authority'] == true) {
                                 await addRecord(id).addTrack(
@@ -303,8 +248,10 @@ class _textFormFieldInputState extends State<textFormFieldInput> {
                                     priceNumController.text,
                                     companyTextController.text,
                                     materialTextController.text,
+                                    typeTextController.text,
                                     productDDValue,
                                     'ADD',
+                                    indexList,
                                     uid,
                                     date,
                                     true);
@@ -313,19 +260,15 @@ class _textFormFieldInputState extends State<textFormFieldInput> {
                                     priceNumController.text,
                                     companyTextController.text,
                                     materialTextController.text,
+                                    typeTextController.text,
                                     productDDValue,
+                                    indexList,
                                     uid,
                                     date);
-                                if (otherCategory == true) {
-                                  await addRecord(id).addTrackWthOther(
-                                      '0',
-                                      otherTextController.text,
-                                      otherDetailTextController.text);
-                                  await addRecord(pid).addProductWthOther(
-                                      '0',
-                                      otherTextController.text,
-                                      otherDetailTextController.text);
-                                }
+
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                        content: Text('Succesfully added')));
                               } else {
                                 await addRecord(id).addTrack(
                                     pid,
@@ -333,17 +276,13 @@ class _textFormFieldInputState extends State<textFormFieldInput> {
                                     priceNumController.text,
                                     companyTextController.text,
                                     materialTextController.text,
+                                    typeTextController.text,
                                     productDDValue,
                                     'ADD',
+                                    indexList,
                                     uid,
                                     date,
                                     false);
-                                if (otherCategory == true) {
-                                  await addRecord(id).addTrackWthOther(
-                                      "0",
-                                      otherTextController.text,
-                                      otherDetailTextController.text);
-                                }
 
                                 ScaffoldMessenger.of(context).showSnackBar(
                                     const SnackBar(

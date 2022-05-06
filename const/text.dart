@@ -48,6 +48,20 @@ Widget boldFirstLetter(boldText, text) {
   );
 }
 
+Widget NoDataText(double size) {
+  return Text(
+    "There is no record for now",
+    style: TextStyle(color: grey, fontSize: size),
+  );
+}
+
+Widget LoadingText(double size) {
+  return Text(
+    "Loading...",
+    style: TextStyle(color: grey, fontSize: size),
+  );
+}
+
 class defaultText extends StatelessWidget {
   final String text;
   final bool italic;

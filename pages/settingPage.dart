@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:price_app/const/color.dart';
 import 'package:price_app/pages/chgEmail.dart';
 import 'package:price_app/pages/chgName.dart';
@@ -139,52 +138,6 @@ class _settingPageState extends State<settingPage> {
                   ),
                 ],
               ),
-              // Form(
-              //   child: Column(
-              //     children: [
-              //       Row(
-              //         children: [
-              //           const Text('First Name'),
-              //           textFormTypeInput('first'),
-              //         ],
-              //       ),
-              //       Row(
-              //         children: [
-              //           const Text('Second Name'),
-              //           textFormTypeInput('second'),
-              //         ],
-              //       ),
-              //       const SizedBox(
-              //         height: 20.0,
-              //       ),
-              //       TextButton.icon(
-              //           onPressed: () async {
-              //             if (formKey.currentState!.validate()) {
-              //               return users.doc(uid).update({
-              //                 'firstName': firstNameTextController.text,
-              //                 'secondName': secondNameTextController.text,
-              //               }).then((value) {
-              //                 ScaffoldMessenger.of(context).showSnackBar(
-              //                     const SnackBar(
-              //                         content: Text('Succesfully Rename')));
-              //               }).catchError((error) {
-              //                 ScaffoldMessenger.of(context).showSnackBar(
-              //                     SnackBar(content: Text(error.toString())));
-              //               });
-              //             }
-              //           },
-              //           icon: const Icon(Icons.save),
-              //           style: ButtonStyle(
-              //             shape: MaterialStateProperty.all(
-              //               RoundedRectangleBorder(
-              //                 borderRadius: BorderRadius.circular(20.0),
-              //               ),
-              //             ),
-              //           ),
-              //           label: const Text('Change name')),
-              //     ],
-              //   ),
-              // ),
             );
           }
           return Scaffold(

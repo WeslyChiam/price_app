@@ -4,7 +4,6 @@ import 'package:price_app/pages/authPage.dart';
 import 'package:price_app/pages/helpPage.dart';
 import 'package:price_app/pages/loginPage.dart';
 import 'package:price_app/pages/settingPage.dart';
-import 'package:price_app/pages/updatePage.dart';
 import 'package:price_app/pages/recordPage.dart';
 
 class drawerList extends StatelessWidget {

@@ -70,7 +70,11 @@ class _deleteAlertState extends State<deleteAlert> {
                           now.month.toString() +
                           '/' +
                           now.year.toString();
-                      String id = 'DELETE' + pid + date;
+                      String str_date = now.day.toString() +
+                          now.month.toString() +
+                          now.year.toString();
+
+                      String id = str_date + 'DELETE' + pid;
                       if (data['authority'] == true) {
                         // await addTrack(pid, uid, date, true);
                         await removeTrack(id).Pending(pid, date, uid, true);

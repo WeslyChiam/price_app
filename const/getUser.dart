@@ -7,9 +7,11 @@ class getUser extends StatelessWidget {
   final String date;
   getUser(this.constantText, this.uid, this.date);
 
+  CollectionReference users = FirebaseFirestore.instance.collection("users");
+
   @override
   Widget build(BuildContext context) {
-    CollectionReference users = FirebaseFirestore.instance.collection('users');
+    // CollectionReference users = FirebaseFirestore.instance.collection('users');
     return FutureBuilder<DocumentSnapshot>(
       future: users.doc(uid).get(),
       builder:

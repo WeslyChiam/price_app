@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:draggable_scrollbar/draggable_scrollbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:price_app/const/color.dart';
 
 class historyPage extends StatelessWidget {
@@ -18,10 +19,19 @@ class historyPage extends StatelessWidget {
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasError) {
-              return const Text('Something went wrong. Please try again');
+              return const Center(
+                child: Text('Something went wrong. Please try again'),
+              );
             }
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Text('Loading...');
+              return Center(
+                child: Row(
+                  children: const <Widget>[
+                    Text('Loading...'),
+                    SpinKitFadingCircle(color: grey)
+                  ],
+                ),
+              );
             }
             if (snapshot.connectionState == ConnectionState.done &&
                 !snapshot.hasData) {
@@ -30,7 +40,11 @@ class historyPage extends StatelessWidget {
               );
             }
             final data = snapshot.requireData;
-            if (data.size > 0) {
+            if (data.size <= 0) {
+              return const Center(
+                child: Text('No track history found'),
+              );
+            } else {
               return DraggableScrollbar.semicircle(
                   controller: listScrollController,
                   child: ListView.builder(
@@ -52,10 +66,6 @@ class historyPage extends StatelessWidget {
                           ),
                         );
                       }));
-            } else {
-              return const Center(
-                child: Text('No track history found'),
-              );
             }
           },
         ));

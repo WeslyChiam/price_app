@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:price_app/const/color.dart';
@@ -188,8 +189,16 @@ class _loginPageState extends State<loginPage> {
         await _auth
             .signInWithEmailAndPassword(email: email, password: password)
             .then((uid) {
+          String tmpName = "anonymous";
+          FirebaseFirestore.instance
+              .collection("users")
+              .doc(FirebaseAuth.instance.currentUser!.uid)
+              .get()
+              .then((value) {
+            tmpName = value.data()!["firstName"];
+          });
           Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => const mainPage()));
+              MaterialPageRoute(builder: (context) => mainPage()));
         });
       } on FirebaseAuthException catch (error) {
         switch (error.code) {

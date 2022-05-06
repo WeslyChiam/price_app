@@ -12,7 +12,9 @@ class addRecord extends StatelessWidget {
     String price,
     String distributor,
     String material,
+    String type,
     String category,
+    List list,
     String uid,
     String date,
   ) async {
@@ -22,7 +24,9 @@ class addRecord extends StatelessWidget {
     productModel.price = price;
     productModel.distributor = distributor;
     productModel.material = material;
+    productModel.type = type;
     productModel.category = category;
+    productModel.list = list;
     productModel.wroteBy = uid;
     productModel.date = date;
     await FirebaseFirestore.instance
@@ -31,13 +35,31 @@ class addRecord extends StatelessWidget {
         .set(productModel.toMap());
   }
 
-  addProductWthOther(counter, String atrName, String atrDetail) async {
+  addProductWthOther(
+    String name,
+    String price,
+    String distributor,
+    String material,
+    String category,
+    String atrName,
+    String atrDetail,
+    String uid,
+    String date,
+  ) async {
     ProductModelWthOther productModelWthOther = ProductModelWthOther();
+    productModelWthOther.pid = id;
+    productModelWthOther.productName = name;
+    productModelWthOther.price = price;
+    productModelWthOther.distributor = distributor;
+    productModelWthOther.material = material;
+    productModelWthOther.category = category;
     productModelWthOther.atrName = atrName;
     productModelWthOther.atrDetail = atrDetail;
+    productModelWthOther.wroteBy = uid;
+    productModelWthOther.date = date;
     await FirebaseFirestore.instance
         .collection("products")
-        .doc("$id/otherAtr/$counter")
+        .doc(id)
         .set(productModelWthOther.toMap());
   }
 
@@ -60,6 +82,7 @@ class addRecord extends StatelessWidget {
       productModel.price = data['price'];
       productModel.distributor = data['distributor'];
       productModel.material = data['material'];
+      productModel.type = data['type'];
       productModel.date = data['writtenDate'];
       productModel.wroteBy = data['wroteBy'];
       FirebaseFirestore.instance
@@ -75,8 +98,10 @@ class addRecord extends StatelessWidget {
     String price,
     String distributor,
     String material,
+    String type,
     String category,
     String action,
+    List list,
     String uid,
     String date,
     bool approve,
@@ -88,6 +113,7 @@ class addRecord extends StatelessWidget {
     trackModel.price = price;
     trackModel.distributor = distributor;
     trackModel.material = material;
+    trackModel.type = type;
     trackModel.category = category;
     trackModel.action = action;
     trackModel.wroteBy = uid;
@@ -99,13 +125,38 @@ class addRecord extends StatelessWidget {
         .set(trackModel.toMap());
   }
 
-  addTrackWthOther(counter, String atrName, String atrDetail) async {
+  addTrackWthOther(
+    String pid,
+    String name,
+    String price,
+    String distributor,
+    String material,
+    String category,
+    String atrName,
+    String atrDetail,
+    String action,
+    String uid,
+    String date,
+    bool approve,
+  ) async {
     TrackModelWthOther trackModelWthOther = TrackModelWthOther();
+    trackModelWthOther.id = id;
+    trackModelWthOther.pid = id;
+    trackModelWthOther.productName = name;
+    trackModelWthOther.price = price;
+    trackModelWthOther.distributor = distributor;
+    trackModelWthOther.material = material;
+    trackModelWthOther.category = category;
     trackModelWthOther.atrName = atrName;
     trackModelWthOther.atrDetail = atrDetail;
+    trackModelWthOther.action = action;
+    trackModelWthOther.wroteBy = uid;
+    trackModelWthOther.date = date;
+    trackModelWthOther.approve = approve;
+
     await FirebaseFirestore.instance
-        .collection("products")
-        .doc("$id/otherAtr/$counter")
+        .collection("tracks")
+        .doc(id)
         .set(trackModelWthOther.toMap());
   }
 

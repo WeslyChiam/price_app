@@ -63,7 +63,7 @@ class authPage extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const approvePage()));
+                                    builder: (context) => approvePage()));
                           }
                         : () {
                             ScaffoldMessenger.of(context).showSnackBar(
