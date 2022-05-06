@@ -12,7 +12,9 @@ class addRecord extends StatelessWidget {
     String price,
     String distributor,
     String material,
+    String type,
     String category,
+    List list,
     String uid,
     String date,
   ) async {
@@ -22,7 +24,9 @@ class addRecord extends StatelessWidget {
     productModel.price = price;
     productModel.distributor = distributor;
     productModel.material = material;
+    productModel.type = type;
     productModel.category = category;
+    productModel.list = list;
     productModel.wroteBy = uid;
     productModel.date = date;
     await FirebaseFirestore.instance
@@ -78,6 +82,7 @@ class addRecord extends StatelessWidget {
       productModel.price = data['price'];
       productModel.distributor = data['distributor'];
       productModel.material = data['material'];
+      productModel.type = data['type'];
       productModel.date = data['writtenDate'];
       productModel.wroteBy = data['wroteBy'];
       FirebaseFirestore.instance
@@ -93,8 +98,10 @@ class addRecord extends StatelessWidget {
     String price,
     String distributor,
     String material,
+    String type,
     String category,
     String action,
+    List list,
     String uid,
     String date,
     bool approve,
@@ -106,6 +113,7 @@ class addRecord extends StatelessWidget {
     trackModel.price = price;
     trackModel.distributor = distributor;
     trackModel.material = material;
+    trackModel.type = type;
     trackModel.category = category;
     trackModel.action = action;
     trackModel.wroteBy = uid;

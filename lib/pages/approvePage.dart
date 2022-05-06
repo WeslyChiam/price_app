@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:draggable_scrollbar/draggable_scrollbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:price_app/const/addRecord.dart';
 import 'package:price_app/const/bottomTable.dart';
 import 'package:price_app/const/color.dart';
@@ -24,7 +25,10 @@ class _approvePageState extends State<approvePage> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-        stream: _trackStream,
+        stream: FirebaseFirestore.instance
+            .collection("tracks")
+            .where("approve", isEqualTo: false)
+            .snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) {
             ScaffoldMessenger.of(context).showSnackBar(
@@ -37,7 +41,12 @@ class _approvePageState extends State<approvePage> {
                 title: Text(title),
               ),
               body: Center(
-                child: LoadingText(15),
+                child: Row(
+                  children: <Widget>[
+                    LoadingText(15),
+                    const SpinKitFadingCircle(color: grey)
+                  ],
+                ),
               ),
             );
           }
@@ -60,9 +69,6 @@ class _approvePageState extends State<approvePage> {
                 child: ListView.builder(
                     itemCount: data.size,
                     itemBuilder: (context, index) {
-                      if (data.docs[index]['approve'] == true) {
-                        index += 1;
-                      }
                       int _tmpIndex = index;
                       String _strIndex = _tmpIndex.toString();
                       return Card(
@@ -122,15 +128,13 @@ class _approvePageState extends State<approvePage> {
                                                       addRecord(data.docs[index]
                                                               ['id'])
                                                           .addProductFromTrack();
-                                                      ScaffoldMessenger.of(
-                                                              context)
-                                                          .showSnackBar(SnackBar(
-                                                              content: Text(
-                                                                  'Remove ${data.docs[index]['productName']}')));
+
                                                       Navigator.pop(context);
                                                     },
                                                     icon: const Icon(
-                                                        Icons.check_outlined),
+                                                      Icons.check_outlined,
+                                                      color: white,
+                                                    ),
                                                     label: const Text(
                                                       'Approve',
                                                       style: TextStyle(
@@ -150,10 +154,17 @@ class _approvePageState extends State<approvePage> {
                                                       removeTrack(data
                                                           .docs[index]['id']
                                                           .Track());
+                                                      ScaffoldMessenger.of(
+                                                              context)
+                                                          .showSnackBar(SnackBar(
+                                                              content: Text(
+                                                                  'Remove ${data.docs[index]['productName']}')));
                                                       Navigator.pop(context);
                                                     },
                                                     icon: const Icon(
-                                                        Icons.cancel_outlined),
+                                                      Icons.cancel_outlined,
+                                                      color: white,
+                                                    ),
                                                     label: const Text(
                                                       'Reject',
                                                       style: TextStyle(

@@ -291,9 +291,10 @@ class _regPaperState extends State<regPaper> {
         .doc(user.uid)
         .set(userModel.toMap());
 
-    Navigator.pushAndRemoveUntil(
-        (context),
-        MaterialPageRoute(builder: (context) => const mainPage()),
-        (route) => false);
+    ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Account created successfully :) ')));
+
+    Navigator.pushAndRemoveUntil((context),
+        MaterialPageRoute(builder: (context) => mainPage()), (route) => false);
   }
 }

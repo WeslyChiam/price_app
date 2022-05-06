@@ -14,7 +14,7 @@ Widget bottomMainTable(
   return Table(
     children: [
       TableRow(children: [const Text("Product Name: "), Text(name)]),
-      TableRow(children: [const Text("Price: "), Text(price)]),
+      TableRow(children: [const Text("Price(RM): "), Text(price)]),
       TableRow(children: [const Text("Distributor: "), Text(distributor)]),
       TableRow(children: [const Text("Material: "), Text(material)]),
       TableRow(children: [const Text("Category: "), Text(category)]),

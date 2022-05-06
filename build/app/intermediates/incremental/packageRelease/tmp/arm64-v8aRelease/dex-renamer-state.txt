@@ -1,4 +1,4 @@
-#Thu Apr 28 14:31:30 MYT 2022
+#Fri May 06 13:16:56 MYT 2022
 base.0=/home/weslychiam/Project/price_app/build/app/intermediates/dex/release/minifyReleaseWithR8/classes.dex
 renamed.0=classes.dex
 path.0=classes.dex

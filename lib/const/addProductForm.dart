@@ -19,6 +19,7 @@ class _textFormFieldInputState extends State<textFormFieldInput> {
   final priceNumController = TextEditingController();
   final companyTextController = TextEditingController();
   final materialTextController = TextEditingController();
+  final typeTextController = TextEditingController();
   final otherTextController = TextEditingController();
   final otherDetailTextController = TextEditingController();
   String productDDValue = 'AIR';
@@ -84,9 +85,11 @@ class _textFormFieldInputState extends State<textFormFieldInput> {
                   ? companyTextController
                   : dataType == 'material'
                       ? materialTextController
-                      : dataType == 'other'
-                          ? otherTextController
-                          : otherDetailTextController,
+                      : dataType == 'type'
+                          ? typeTextController
+                          : dataType == 'other'
+                              ? otherTextController
+                              : otherDetailTextController,
       keyboardType:
           dataType == 'price' ? TextInputType.number : TextInputType.name,
       validator: enable == true
@@ -123,13 +126,17 @@ class _textFormFieldInputState extends State<textFormFieldInput> {
                       ? (value) {
                           materialTextController.text = value!;
                         }
-                      : dataType == 'other'
+                      : dataType == 'type'
                           ? (value) {
-                              otherTextController.text = value!;
+                              typeTextController.text = value!;
                             }
-                          : (value) {
-                              otherDetailTextController.text = value!;
-                            },
+                          : dataType == 'other'
+                              ? (value) {
+                                  otherTextController.text = value!;
+                                }
+                              : (value) {
+                                  otherDetailTextController.text = value!;
+                                },
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
         prefixIcon: Icon(dataType == 'name'
@@ -138,11 +145,13 @@ class _textFormFieldInputState extends State<textFormFieldInput> {
                 ? Icons.price_change
                 : dataType == 'company'
                     ? Icons.add_business
-                    : dataType == 'material'
-                        ? Icons.hive
-                        : dataType == 'other'
-                            ? Icons.add_box
-                            : Icons.add_card),
+                    : dataType == 'type'
+                        ? Icons.tab
+                        : dataType == 'material'
+                            ? Icons.hive
+                            : dataType == 'other'
+                                ? Icons.add_box
+                                : Icons.add_card),
         contentPadding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         hintText: dataType == 'name'
             ? 'Product Name'
@@ -152,9 +161,11 @@ class _textFormFieldInputState extends State<textFormFieldInput> {
                     ? 'Distributor'
                     : dataType == 'material'
                         ? 'Material Name'
-                        : dataType == 'other'
-                            ? 'Other Attribute Name'
-                            : 'Details',
+                        : dataType == 'type'
+                            ? 'type'
+                            : dataType == 'other'
+                                ? 'Other Attribute Name'
+                                : 'Details',
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),
@@ -177,7 +188,6 @@ class _textFormFieldInputState extends State<textFormFieldInput> {
           if (snapshot.connectionState == ConnectionState.done) {
             Map<String, dynamic> data =
                 snapshot.data!.data() as Map<String, dynamic>;
-            bool auth = data['authority'];
             return Form(
                 key: formKey,
                 child: Column(
@@ -192,6 +202,8 @@ class _textFormFieldInputState extends State<textFormFieldInput> {
                     textFormTypeInput('company', true),
                     const SizedBox(height: 20.0),
                     textFormTypeInput('material', true),
+                    const SizedBox(height: 20.0),
+                    textFormTypeInput('type', true),
                     const SizedBox(height: 20.0),
                     categoryDD(),
                     const SizedBox(height: 20.0),
@@ -221,84 +233,57 @@ class _textFormFieldInputState extends State<textFormFieldInput> {
                               final auth = FirebaseFirestore.instance
                                   .collection('users')
                                   .doc(uid);
+                              List<String> splitList =
+                                  nameTextController.text.split(" ");
+                              List<String> indexList = [];
+                              for (int i = 0; i < splitList.length; i++) {
+                                indexList.add(
+                                    splitList[i].substring(0, i).toLowerCase());
+                              }
 
                               if (data['authority'] == true) {
-                                if (otherCategory == true) {
-                                  await addRecord(id).addProductWthOther(
-                                      nameTextController.text,
-                                      priceNumController.text,
-                                      companyTextController.text,
-                                      materialTextController.text,
-                                      productDDValue,
-                                      otherTextController.text,
-                                      otherDetailTextController.text,
-                                      uid,
-                                      date);
-                                  await addRecord(id).addTrackWthOther(
-                                      pid,
-                                      nameTextController.text,
-                                      priceNumController.text,
-                                      companyTextController.text,
-                                      materialTextController.text,
-                                      productDDValue,
-                                      otherTextController.text,
-                                      otherDetailTextController.text,
-                                      'ADD',
-                                      uid,
-                                      date,
-                                      true);
-                                } else {
-                                  await addRecord(id).addTrack(
-                                      pid,
-                                      nameTextController.text,
-                                      priceNumController.text,
-                                      companyTextController.text,
-                                      materialTextController.text,
-                                      productDDValue,
-                                      'ADD',
-                                      uid,
-                                      date,
-                                      true);
-                                  await addRecord(pid).addProduct(
-                                      nameTextController.text,
-                                      priceNumController.text,
-                                      companyTextController.text,
-                                      materialTextController.text,
-                                      productDDValue,
-                                      uid,
-                                      date);
-                                }
+                                await addRecord(id).addTrack(
+                                    pid,
+                                    nameTextController.text,
+                                    priceNumController.text,
+                                    companyTextController.text,
+                                    materialTextController.text,
+                                    typeTextController.text,
+                                    productDDValue,
+                                    'ADD',
+                                    indexList,
+                                    uid,
+                                    date,
+                                    true);
+                                await addRecord(pid).addProduct(
+                                    nameTextController.text,
+                                    priceNumController.text,
+                                    companyTextController.text,
+                                    materialTextController.text,
+                                    typeTextController.text,
+                                    productDDValue,
+                                    indexList,
+                                    uid,
+                                    date);
+
                                 ScaffoldMessenger.of(context).showSnackBar(
                                     const SnackBar(
                                         content: Text('Succesfully added')));
                               } else {
-                                if (otherCategory == true) {
-                                  await addRecord(id).addTrackWthOther(
-                                      pid,
-                                      nameTextController.text,
-                                      priceNumController.text,
-                                      companyTextController.text,
-                                      materialTextController.text,
-                                      productDDValue,
-                                      otherTextController.text,
-                                      otherDetailTextController.text,
-                                      'ADD',
-                                      uid,
-                                      date,
-                                      false);
-                                } else {
-                                  await addRecord(id).addTrack(
-                                      pid,
-                                      nameTextController.text,
-                                      priceNumController.text,
-                                      companyTextController.text,
-                                      materialTextController.text,
-                                      productDDValue,
-                                      'ADD',
-                                      uid,
-                                      date,
-                                      false);
-                                }
+                                await addRecord(id).addTrack(
+                                    pid,
+                                    nameTextController.text,
+                                    priceNumController.text,
+                                    companyTextController.text,
+                                    materialTextController.text,
+                                    typeTextController.text,
+                                    productDDValue,
+                                    'ADD',
+                                    indexList,
+                                    uid,
+                                    date,
+                                    false);
+
                                 ScaffoldMessenger.of(context).showSnackBar(
                                     const SnackBar(
                                         content: Text(

@@ -4,7 +4,9 @@ class ProductModel {
   String? price;
   String? distributor;
   String? material;
+  String? type;
   String? category;
+  List? list;
   String? wroteBy;
   String? date;
 
@@ -14,7 +16,9 @@ class ProductModel {
       this.price,
       this.distributor,
       this.material,
+      this.type,
       this.category,
+      this.list,
       this.wroteBy,
       this.date});
 
@@ -25,7 +29,9 @@ class ProductModel {
       price: map['price'],
       distributor: map['distributor'],
       material: map['material'],
+      type: map['type'],
       category: map['category'],
+      list: map['list'],
       wroteBy: map['wroteBy'],
       date: map['date'],
     );
@@ -38,7 +44,9 @@ class ProductModel {
       'price': price,
       'distributor': distributor,
       'material': material,
+      'type': type,
       'category': category,
+      'list': list,
       'wroteBy': wroteBy,
       'writtenDate': date,
     };

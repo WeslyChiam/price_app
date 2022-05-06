@@ -5,9 +5,11 @@ class TrackModel {
   String? price;
   String? distributor;
   String? material;
+  String? type;
   String? category;
   String? wroteBy;
   String? action;
+  List? list;
   String? date;
   bool? approve;
 
@@ -18,10 +20,12 @@ class TrackModel {
       this.price,
       this.distributor,
       this.material,
+      this.type,
       this.category,
       this.wroteBy,
       this.date,
       this.action,
+      this.list,
       this.approve});
 
   factory TrackModel.fromMap(map) {
@@ -32,9 +36,11 @@ class TrackModel {
       price: map['price'],
       distributor: map['distributor'],
       material: map['material'],
+      type: map['type'],
       category: map['category'],
       wroteBy: map['wroteBy'],
       action: map['action'],
+      list: map['list'],
       date: map['date'],
       approve: map['approve'],
     );
@@ -48,8 +54,10 @@ class TrackModel {
       'price': price,
       'distributor': distributor,
       'material': material,
+      'type': type,
       'category': category,
       'action': action,
+      'list': list,
       'wroteBy': wroteBy,
       'writtenDate': date,
       'approve': approve,
