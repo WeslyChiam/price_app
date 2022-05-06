@@ -5,19 +5,17 @@ import 'package:price_app/const/color.dart';
 import 'package:price_app/const/text.dart';
 import 'package:price_app/pages/approvePage.dart';
 
-class authPage extends StatelessWidget {
+class authPage extends StatefulWidget {
+  @override
+  State<authPage> createState() => _authPageState();
+}
+
+class _authPageState extends State<authPage> {
   final uid = FirebaseAuth.instance.currentUser!.uid;
+
   final Stream<QuerySnapshot> _userStream = FirebaseFirestore.instance
       .collection(FirebaseAuth.instance.currentUser!.uid)
       .snapshots();
-
-  convertAuthLvl(data) {
-    if (data == 'false') {
-      return 'Level-1';
-    } else {
-      return 'Level-2';
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,14 +33,16 @@ class authPage extends StatelessWidget {
           Map<String, dynamic> data =
               snapshot.data!.data() as Map<String, dynamic>;
           bool auth = data['authority'];
-          String authString = convertAuthLvl(auth);
           return Scaffold(
             appBar: AppBar(
               title: const Text('Authentication'),
             ),
             body:
                 ListView(padding: const EdgeInsets.all(8.0), children: <Widget>[
-              mainTitle("${data['firstName']}'s authority level: $authString"),
+              data['authority'] == true
+                  ? mainTitle("${data['firstName']}'s authority level: Level-2")
+                  : mainTitle(
+                      "${data['firstName']}'s authority level: Level-1"),
               content("The function you get access to:"),
               bulletList("1. ", "View the database at any time"),
               auth == false
