@@ -156,7 +156,7 @@ class _textFormFieldInputState extends State<textFormFieldInput> {
         hintText: dataType == 'name'
             ? 'Product Name'
             : dataType == 'price'
-                ? 'Price(RM)'
+                ? 'Price(RM) per unit'
                 : dataType == 'company'
                     ? 'Distributor'
                     : dataType == 'material'

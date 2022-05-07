@@ -41,34 +41,43 @@ class historyPage extends StatelessWidget {
                     controller: listScrollController,
                     child: ListView.builder(
                         itemCount: data.size,
-                        shrinkWrap: false,
                         itemBuilder: (context, index) {
+                          if (data.docs[index]['action'] == "DELETE") {
+                            return Card(
+                              child: ListTile(
+                                title: Text(
+                                    "${data.docs[index]['action']} ${data.docs[index]['productName']}"),
+                                subtitle: Text(
+                                    "Removed by ${data.docs[index]['writtenDate']}"),
+                                trailing: const Icon(Icons.delete_forever),
+                              ),
+                            );
+                          } else if (data.docs[index]['action'] == "UPDATE") {
+                            return Card(
+                              child: ListTile(
+                                title: Text(
+                                    "${data.docs[index]['action']} ${data.docs[index]['productName']}"),
+                                subtitle: Text(
+                                    "Update by ${data.docs[index]['writtenDate']}"),
+                                trailing: const Icon(Icons.update),
+                              ),
+                            );
+                          }
                           return Card(
-                            child: data.docs[index]['action'] == "DELETE"
-                                ? ListTile(
-                                    title:
-                                        Text(data.docs[index]['productName']),
-                                    subtitle:
-                                        const Text("Removed from database"),
-                                    trailing: const Icon(Icons.delete_forever,
-                                        color: grey),
-                                  )
-                                : ListTile(
-                                    title:
-                                        Text(data.docs[index]['productName']),
-                                    subtitle: Text(
-                                        data.docs[index]['approve'] == true
-                                            ? 'Approved'
-                                            : 'Waiting for approve'),
-                                    trailing: Icon(
-                                        data.docs[index]['approve'] == true
-                                            ? Icons.assignment_turned_in
-                                            : Icons.autorenew,
-                                        color:
-                                            data.docs[index]['approve'] == true
-                                                ? green
-                                                : red),
-                                  ),
+                            child: ListTile(
+                              title: Text(
+                                  "${data.docs[index]['action']} ${data.docs[index]['productName']}"),
+                              subtitle: Text(data.docs[index]['approve'] == true
+                                  ? "Approved by ${data.docs[index]['writtenDate']}"
+                                  : 'Waiting for approve'),
+                              trailing: Icon(
+                                  data.docs[index]['approve'] == true
+                                      ? Icons.assignment_turned_in
+                                      : Icons.autorenew,
+                                  color: data.docs[index]['approve'] == true
+                                      ? green
+                                      : red),
+                            ),
                           );
                         }));
               }
